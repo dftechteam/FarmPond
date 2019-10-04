@@ -322,6 +322,9 @@ public class MainActivity extends AppCompatActivity
 
                /* Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                 startActivity(intent);*/
+
+                Intent intent = new Intent(MainActivity.this,EachFarmPondDetails_Activity.class);
+                startActivity(intent);
             }
         } catch (JSONException e) {
             e.printStackTrace();
