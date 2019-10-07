@@ -12,6 +12,16 @@
         layout="@layout/titlebar_custom" />
 
 
+    <ListView
+        android:id="@+id/farmpondlist_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/vivid_cyan"
+        android:dividerHeight="2px"
+        android:fillViewport="true">
+
+    </ListView>
+
 
 
 </LinearLayout>

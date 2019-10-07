@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity
 
         context_obj=this.getApplicationContext();
 
+        //
+
         sharedpreferencebook_usercredential_Obj=this.getSharedPreferences(sharedpreferencebook_usercredential, Context.MODE_PRIVATE);
 
 
