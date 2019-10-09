@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EachFarmPondDetails_Activity">
+
+    <include
+        android:id="@+id/toolbar_farmponddetails"
+        layout="@layout/titlebar_custom" />
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="15dp"
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="FarmerName"
+                android:textSize="30px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#20b6e8"
+                />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/add_newpond_farmername_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter FarmerName"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="Pond Width"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/add_newpond_width_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="4"
+                    android:digits="0123456789"
+                    android:text=""
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="Pond Height"
+                    android:digits="0123456789"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/add_newpond_height_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLength="4"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="Pond Depth"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/add_newpond_depth_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="4"
+                    android:digits="0123456789"
+                    android:text=""
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/add_newpond_image1_1iv"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center_horizontal"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  "
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/add_newpond_image2_1iv"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center_horizontal"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  "
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/add_newpond_image3_1iv"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center_horizontal"
+                    android:src="@mipmap/ic_launcher"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:layout_gravity="center"
+                   >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        android:src="@drawable/add_farmpond_image"
+                        android:id="@+id/add_newpond_image1_iv" />
+
+                    <ImageButton
+                        android:visibility="gone"
+                        android:id="@+id/removeimage1_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_alignRight="@+id/add_newpond_image1_iv"
+                        android:layout_alignTop="@+id/add_newpond_image1_iv"
+                        android:layout_alignEnd="@+id/add_newpond_image1_iv" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  "
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="10dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        android:src="@drawable/add_farmpond_image"
+                        android:id="@+id/add_newpond_image2_iv" />
+
+                    <ImageButton
+                        android:id="@+id/removeimage2_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/add_newpond_image2_iv"
+                        android:layout_alignEnd="@+id/add_newpond_image2_iv"
+                        android:layout_alignRight="@+id/add_newpond_image2_iv"
+                        android:background="@android:drawable/ic_delete"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  "
+                    android:textColor="@color/dark_black_red"
+                    android:textSize="10dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        android:src="@drawable/add_farmpond_image"
+                        android:id="@+id/add_newpond_image3_iv" />
+
+                    <ImageButton
+                        android:visibility="gone"
+                        android:id="@+id/removeimage3_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_alignRight="@+id/add_newpond_image3_iv"
+                        android:layout_alignTop="@+id/add_newpond_image3_iv"
+                        android:layout_alignEnd="@+id/add_newpond_image3_iv" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/add_ponddetails_cancel_bt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="Cancel"
+                    android:textColor="@color/color_red"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/add_ponddetails_submit_bt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:text="Submit"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+</ScrollView>
+
+
+
+</LinearLayout>

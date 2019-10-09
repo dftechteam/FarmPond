@@ -21,6 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,8 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
     ArrayList<Class_response_farmponddetails> farmpond_List = new ArrayList<>();
     private ListView farmpondlist_listview;
 
+    String str_farmpondbaseimage_url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,6 +66,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        str_farmpondbaseimage_url = Class_URL.URL_farmpondbaselink.toString().trim();
         TextView title= (TextView) toolbar.findViewById(R.id.title_name);
         add_newfarmpond_iv=(ImageView) toolbar.findViewById(R.id.add_newfarmpond_iv);
         title.setText("FarmPond Details");
@@ -75,6 +80,18 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
+
+        add_newfarmpond_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent_addfarmpondactivity = new Intent(EachFarmPondDetails_Activity.this,AddFarmPondDetails_Activity.class);
+                intent_addfarmpondactivity.putExtra("farmername", class_farmponddetails_array_obj[0].getFarmer_Name().toString());
+                startActivity(intent_addfarmpondactivity);
+                finish();
+
+            }
+        });
 
     }// end of oncreate
 
@@ -190,11 +207,28 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 for(int i=0;i<int_jsonarraylength;i++)
                 {
                     Class_farmponddetails class_farmponddetails_innerobj = new Gson().fromJson(String.valueOf(response_jsonarray.get(i).toString()), Class_farmponddetails.class);
-                   Log.e("name", class_farmponddetails_innerobj.getFarmer_Name().toString());
-                    Log.e("depth", class_farmponddetails_innerobj.getFarmpond_Depth().toString());
+                    class_farmponddetails_array_obj[i]=class_farmponddetails_innerobj;
+
+
+                  // Log.e("name", class_farmponddetails_innerobj.getFarmer_Name().toString());
+                   // Log.e("depth", class_farmponddetails_innerobj.getFarmpond_Depth().toString());
                    // Log.e("name", class_farmponddetails_innerobj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
                     //Log.e("name", String.valueOf(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()));
-                    class_farmponddetails_array_obj[i]=class_farmponddetails_innerobj;
+                    //Log.e("name", String.valueOf(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()));
+
+
+                    //Incase of Offline
+                   /* if(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()>0)
+                    {
+                        for(int j=0;j<class_farmponddetails_innerobj.getClass_farmpondimages_obj().size();j++)
+                        {
+
+                        }
+
+                    }*/
+                    //Incase of Offline
+
+
                 }
 
                 if (class_farmponddetails_array_obj != null)
@@ -206,7 +240,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
                     System.out.println("Inside the if list adapter" + x);
                 } else {
-                    Log.d("onPostExecute", "ondutyhistoryclass_arrayObj == null");
+                    Log.d("onPostExecute", "class_farmponddetails_array_obj == null");
                 }
 
                 //Class_response_farmponddetails class_response_farmponddetails_obj = gson.fromJson(x, Class_response_farmponddetails.class);
@@ -310,8 +344,8 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 holder.holder_ponddepth = (TextView) convertView.findViewById(R.id.pond_depth);
 
                 holder.holder_farmpond_image1 = (ImageView) convertView.findViewById(R.id.farmpondimage1_iv);
-                holder.holder_farmpond_image1 = (ImageView) convertView.findViewById(R.id.farmpondimage1_iv);
-                holder.holder_farmpond_image1 = (ImageView) convertView.findViewById(R.id.farmpondimage1_iv);
+                holder.holder_farmpond_image2 = (ImageView) convertView.findViewById(R.id.farmpondimage2_iv);
+                holder.holder_farmpond_image3 = (ImageView) convertView.findViewById(R.id.farmpondimage3_iv);
                 holder.holder_farmer_id = (TextView) convertView.findViewById(R.id.farmer_id_tv);
                 holder.holder_farmpond_id = (TextView) convertView.findViewById(R.id.farmpond_id_tv);
 
@@ -328,12 +362,67 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
-            if (farmponddetails_obj != null) {
+            if (farmponddetails_obj != null)
+            {
                 holder.holder_farmername.setText(farmponddetails_obj.getFarmer_Name());
                 holder.holder_pondwidth.setText(farmponddetails_obj.getFarmpond_Width());
                 holder.holder_pondheight.setText(farmponddetails_obj.getFarmpond_Height());
                 holder.holder_ponddepth.setText(farmponddetails_obj.getFarmpond_Depth());
-            }
+
+                if(farmponddetails_obj.getClass_farmpondimages_obj().size()>0)
+                {
+                    for(int j=0;j<farmponddetails_obj.getClass_farmpondimages_obj().size();j++)
+                    {
+
+                        Log.e("imageurl", str_farmpondbaseimage_url + farmponddetails_obj.getClass_farmpondimages_obj().get(j).getImage_url().toString());
+
+                        String str_farmpondimageurl=str_farmpondbaseimage_url + farmponddetails_obj.getClass_farmpondimages_obj().get(j).getImage_url().toString();
+
+                        if (j == 0)
+                        {
+                            Picasso.get()
+                                    .load(str_farmpondimageurl)
+                                    .into(holder.holder_farmpond_image1, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                        }
+                                        @Override
+                                        public void onError(Exception e) {
+                                        }
+                                    });
+                        }if(j==1)
+                        {
+                            Picasso.get()
+                                    .load(str_farmpondimageurl)
+                                    .into(holder.holder_farmpond_image2, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                        }
+                                        @Override
+                                        public void onError(Exception e) {
+                                        }
+                                    });
+                        }
+                        if(j==2)
+                        {
+                            Picasso.get()
+                                    .load(str_farmpondimageurl)
+                                    .into(holder.holder_farmpond_image2, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                        }
+                                        @Override
+                                        public void onError(Exception e) {
+                                        }
+                                    });
+                        }
+                    } // end for 1
+                }// end if 2
+
+
+
+
+            }// end if 1
 
             return convertView;
 

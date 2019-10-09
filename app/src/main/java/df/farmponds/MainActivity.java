@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
         //normal login comment while releasing apk
 
     }// end of onCreate()

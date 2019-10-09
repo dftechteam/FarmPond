@@ -162,8 +162,8 @@
 
             <ImageView
                 android:id="@+id/farmpondimage1_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.5"
                 android:gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher"
@@ -179,8 +179,8 @@
 
             <ImageView
                 android:id="@+id/farmpondimage2_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.5"
                 android:gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher"
@@ -196,8 +196,8 @@
 
             <ImageView
                 android:id="@+id/farmpondimage3_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.5"
                 android:gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher"
