@@ -242,14 +242,16 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/descriptionondutyhistorylabel_TV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Edit"
-                android:textColor="@color/color_red"
-                android:textSize="15dp" />
+
+
+            <ImageView
+                android:id="@+id/editfarmerponddetails_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:gravity="center_horizontal"
+                android:src="@drawable/editdetails"
+                />
         </LinearLayout>
 
 
