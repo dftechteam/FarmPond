@@ -47,16 +47,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
     Toolbar toolbar;
     ImageView add_newfarmpond_iv;
-
-    Class_response_farmponddetails  class_response_farmponddetails_object;
-    Class_farmponddetails[] class_farmponddetails_array_obj;
-
-    ArrayList<Class_response_farmponddetails> farmpond_List = new ArrayList<>();
-
-
-    String str_farmpondbaseimage_url;
-
-
+    
     EditText add_newpond_width_et,add_newpond_height_et,add_newpond_depth_et;
     TextView add_newpond_farmername_et;
     ImageView add_newpond_image1_iv,add_newpond_image2_iv,add_newpond_image3_iv;
