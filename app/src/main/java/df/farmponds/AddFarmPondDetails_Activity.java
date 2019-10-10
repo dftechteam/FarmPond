@@ -47,7 +47,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
     Toolbar toolbar;
     ImageView add_newfarmpond_iv;
-    
+
     EditText add_newpond_width_et,add_newpond_height_et,add_newpond_depth_et;
     TextView add_newpond_farmername_et;
     ImageView add_newpond_image1_iv,add_newpond_image2_iv,add_newpond_image3_iv;
@@ -276,10 +276,16 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                     }
                 }){
             @Override
-            protected Map<String,String> getParams(){
+            protected Map<String,String> getParams()
+            {
                 Map<String,String> params = new HashMap<String, String>();
 
-                params.put("Farmer_ID",add_newpond_farmername_et.getText().toString());
+
+                String str_image1=arraylist_image1_base64.get(0).toString();
+                String str_image2=arraylist_image2_base64.get(0).toString();
+                String str_image3=arraylist_image3_base64.get(0).toString();
+
+                params.put("Farmer_ID","1"); // farmerID from previous screen
                 params.put("Width",add_newpond_width_et.getText().toString());
                 params.put("Height",add_newpond_height_et.getText().toString());
                 params.put("Depth",add_newpond_depth_et.getText().toString());
@@ -289,12 +295,15 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                 params.put("image_link_2",arraylist_image2_base64.get(0).toString());
                 params.put("image_link_3",arraylist_image3_base64.get(0).toString());
 
+                //Log.e("image", arraylist_image1_base64.get(0).toString());
+              //Log.e("requesrt", String.valueOf(params));
                 return params;
             }
 
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        Log.e("request",stringRequest.toString());
         requestQueue.add(stringRequest);
     }
 
@@ -310,6 +319,9 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                 Intent intent = new Intent(AddFarmPondDetails_Activity.this,EachFarmPondDetails_Activity.class);
                 startActivity(intent);
                 finish();
+            }
+            else{
+                Toast.makeText(getApplication(),jsonObject.getString("statusMessage").toString(),Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

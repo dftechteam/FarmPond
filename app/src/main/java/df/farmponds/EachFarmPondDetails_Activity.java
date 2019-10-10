@@ -135,8 +135,6 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-
-
                 params.put("farmer_id","1");
 
                 return params;
@@ -195,12 +193,6 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 Log.e("framer_array", String.valueOf(response_jsonarray.length()));
 
                 int int_jsonarraylength=response_jsonarray.length();
-                //JSONObject single_jsonobject = response_jsonarray.getJSONObject(0);
-               // JSONArray response_jsonarray1 =response_jsonarray.get(0).toString();
-
-
-              // Class_response_farmponddetails class_response_farmponddetails_obj = gson.fromJson(String.valueOf(response_jsonarray.get(0).toString()), Class_response_farmponddetails.class);
-
 
                 class_farmponddetails_array_obj = new Class_farmponddetails[int_jsonarraylength];
 
@@ -208,14 +200,6 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 {
                     Class_farmponddetails class_farmponddetails_innerobj = new Gson().fromJson(String.valueOf(response_jsonarray.get(i).toString()), Class_farmponddetails.class);
                     class_farmponddetails_array_obj[i]=class_farmponddetails_innerobj;
-
-
-                  // Log.e("name", class_farmponddetails_innerobj.getFarmer_Name().toString());
-                   // Log.e("depth", class_farmponddetails_innerobj.getFarmpond_Depth().toString());
-                   // Log.e("name", class_farmponddetails_innerobj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
-                    //Log.e("name", String.valueOf(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()));
-                    //Log.e("name", String.valueOf(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()));
-
 
                     //Incase of Offline
                    /* if(class_farmponddetails_innerobj.getClass_farmpondimages_obj().size()>0)
@@ -243,24 +227,6 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                     Log.d("onPostExecute", "class_farmponddetails_array_obj == null");
                 }
 
-                //Class_response_farmponddetails class_response_farmponddetails_obj = gson.fromJson(x, Class_response_farmponddetails.class);
-               // Class_response_farmponddetails[] class_response_farmponddetails_obj = new Gson().fromJson((response_jsonarray.toString()), Class_response_farmponddetails[].class);
-
-
-
-                //Log.e("name",class_response_farmponddetails_obj.get_responsestatus().toString());
-
-              //  Log.e("name",class_response_farmponddetails_obj.get_farmponddetails().get(0).getFarmer_Name().toString());
-
-              //  Log.e("name",class_response_farmponddetails_obj[0].get_farmponddetails().get(1).getFarmer_Name().toString());
-
-               //Toast.makeText(getApplicationContext(),""+ class_response_farmponddetails_obj[1].get_farmponddetails().get(1).getfarmer_id().toString(),Toast.LENGTH_LONG).show();
-               // class_response_farmponddetails_obj[0].get_farmponddetails().get(0).getFarmer_Name().toString();
-                //class_response_farmponddetails_object=(Class_response_farmponddetails) response;
-
-
-               /* Intent intent = new Intent(MainActivity.this,EachFarmPondDetails_Activity.class);
-                startActivity(intent);*/
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -407,7 +373,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                         {
                             Picasso.get()
                                     .load(str_farmpondimageurl)
-                                    .into(holder.holder_farmpond_image2, new Callback() {
+                                    .into(holder.holder_farmpond_image3, new Callback() {
                                         @Override
                                         public void onSuccess() {
                                         }
