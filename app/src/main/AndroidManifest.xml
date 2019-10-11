@@ -37,7 +37,7 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".Activity_MarketingHomeScreen"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".ViewFarmers"
+        <activity android:name=".Activity_ViewFarmers"
             android:theme="@style/AppThemeNoActionBar" />
     </application>
 

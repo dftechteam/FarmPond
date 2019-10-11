@@ -1,13 +1,16 @@
 package df.farmponds;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -50,6 +53,11 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
     String str_farmpondbaseimage_url;
 
+    SharedPreferences sharedpref_farmerid_Obj;
+    String str_farmerID;
+    public static final String sharedpreferenc_farmerid = "sharedpreference_farmer_id";
+    public static final String Key_FarmerID = "farmer_id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -75,6 +83,9 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
 
         farmpondlist_listview = (ListView) findViewById(R.id.farmpondlist_listview);
+
+        sharedpref_farmerid_Obj=getSharedPreferences(sharedpreferenc_farmerid, Context.MODE_PRIVATE);
+        str_farmerID = sharedpref_farmerid_Obj.getString(Key_FarmerID, "").trim();
 
         AsyncTask_fetch_farmponddetails();
 
@@ -135,7 +146,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("farmer_id","1");
+                params.put("farmer_id",str_farmerID);
 
                 return params;
             }
@@ -397,7 +408,32 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(EachFarmPondDetails_Activity.this,Activity_ViewFarmers.class);
+        startActivity(i);
+        finish();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+
+        if (id == android.R.id.home) {
+            //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(EachFarmPondDetails_Activity.this, Activity_ViewFarmers.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
