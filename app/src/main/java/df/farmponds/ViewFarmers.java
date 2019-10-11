@@ -197,6 +197,7 @@ public class ViewFarmers extends AppCompatActivity {
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     String str_selected_farmerID,str_selected_farmerID_forimagesaving;
+
     public static final String sharedpreferenc_farmerid = "sharedpreference_farmer_id";
     public static final String Key_FarmerID = "farmer_id";
     SharedPreferences sharedpref_farmerid_Obj;
