@@ -1,8 +1,12 @@
 package df.farmponds;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -198,6 +203,8 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
                 for(int i=0;i<int_jsonarraylength;i++)
                 {
+
+                    Log.e("json array",response_jsonarray.get(i).toString());
                     Class_farmponddetails class_farmponddetails_innerobj = new Gson().fromJson(String.valueOf(response_jsonarray.get(i).toString()), Class_farmponddetails.class);
                     class_farmponddetails_array_obj[i]=class_farmponddetails_innerobj;
 
@@ -250,6 +257,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         ImageView holder_farmpond_image1;
         ImageView holder_farmpond_image2;
         ImageView holder_farmpond_image3;
+        ImageView holder_editfarmerponddetails;
     }
 
 
@@ -314,6 +322,8 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 holder.holder_farmpond_image3 = (ImageView) convertView.findViewById(R.id.farmpondimage3_iv);
                 holder.holder_farmer_id = (TextView) convertView.findViewById(R.id.farmer_id_tv);
                 holder.holder_farmpond_id = (TextView) convertView.findViewById(R.id.farmpond_id_tv);
+                holder.holder_editfarmerponddetails=(ImageView)convertView.findViewById(R.id.editfarmerponddetails_iv);
+
 
                 Log.d("Inside If convertView", "Inside If convertView");
 
@@ -324,7 +334,12 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 Log.d("Inside else convertView", "Inside else convertView");
             }
 
-            Class_farmponddetails farmponddetails_obj = (Class_farmponddetails) getItem(position);
+
+
+
+
+
+            final Class_farmponddetails farmponddetails_obj = (Class_farmponddetails) getItem(position);
 
 
 
@@ -334,6 +349,14 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
                 holder.holder_pondwidth.setText(farmponddetails_obj.getFarmpond_Width());
                 holder.holder_pondheight.setText(farmponddetails_obj.getFarmpond_Height());
                 holder.holder_ponddepth.setText(farmponddetails_obj.getFarmpond_Depth());
+
+                holder.holder_editfarmerponddetails.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        edit_farmponddetails_alertdialog(farmponddetails_obj);
+                    }
+                });
 
                 if(farmponddetails_obj.getClass_farmpondimages_obj().size()>0)
                 {
@@ -397,9 +420,47 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
+public void edit_farmponddetails_alertdialog(final Class_farmponddetails farmponddetails_obj) {
+    AlertDialog.Builder dialog = new AlertDialog.Builder(EachFarmPondDetails_Activity.this);
+    dialog.setCancelable(false);
+    dialog.setTitle(R.string.app_name);
+    dialog.setMessage("Are you sure want to Edit Details");
 
+    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int id)
+        {
+            Class_farmponddetails inner_obj=new Class_farmponddetails();
+            inner_obj=farmponddetails_obj;
 
+            Gson gson = new Gson();
+            String str_json = gson.toJson(inner_obj);
 
+            Intent i = new Intent(EachFarmPondDetails_Activity.this, EditFarmPondDetails_Activity.class);
+            i.putExtra("jsonObject", str_json.toString());
+            startActivity(i);
+            finish();
 
+        }
+    })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //Action for "Cancel".
+                    dialog.dismiss();
+                }
+            });
+
+    final AlertDialog alert = dialog.create();
+    alert.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface arg0) {
+            alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+        }
+    });
+    alert.show();
+
+}
 
 }//end of class
