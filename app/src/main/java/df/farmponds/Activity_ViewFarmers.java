@@ -520,7 +520,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 myprefs_farmerid.putString(Key_FarmerID, str_selected_farmerID);
                 myprefs_farmerid.apply();
                 startActivity(i);
-                finish();
+               // finish();
 
             }
         });

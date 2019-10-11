@@ -413,7 +413,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         super.onBackPressed();
         Intent i=new Intent(EachFarmPondDetails_Activity.this,Activity_ViewFarmers.class);
         startActivity(i);
-        finish();
+       // finish();
     }
 
     @Override
@@ -428,7 +428,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(EachFarmPondDetails_Activity.this, Activity_ViewFarmers.class);
             startActivity(i);
-            finish();
+          //  finish();
             return true;
         }
 
