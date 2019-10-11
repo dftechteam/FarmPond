@@ -8,7 +8,8 @@ public class SaveSharedPreference
 {
     static final String PREF_USER_NAME= "username";
 
-    static SharedPreferences getSharedPreferences(Context ctx) {
+    static SharedPreferences getSharedPreferences(Context ctx)
+    {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
