@@ -23,6 +23,9 @@
             android:theme="@style/AppThemeNoActionBar"></activity>
         <activity android:name=".AddFarmPondDetails_Activity"
             android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".EditFarmPondDetails_Activity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
