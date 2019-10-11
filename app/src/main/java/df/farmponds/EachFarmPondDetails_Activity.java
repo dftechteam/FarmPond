@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,6 +51,10 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
     private ListView farmpondlist_listview;
 
     String str_farmpondbaseimage_url;
+
+    Class_InternetDectector internetDectector;
+    Boolean isInternetPresent = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -395,10 +401,68 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         }//End of custom getView
     }//End of CustomAdapter
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.logout) {
+            // Toast.makeText(CalenderActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            internetDectector = new Class_InternetDectector(getApplicationContext());
+            isInternetPresent = internetDectector.isConnectingToInternet();
+
+            if (isInternetPresent) {
+
+                SaveSharedPreference.setUserName(getApplicationContext(),"");
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("logout_key1", "yes");
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+                finish();
+
+//                Intent i = new Intent(getApplicationContext(), NormalLogin.class);
+//                i.putExtra("logout_key1", "yes");
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(i);
+                //finish();
+                //}
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"No Internet", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
+        if(id== android.R.id.home) {
+            //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(EachFarmPondDetails_Activity.this, Activity_HomeScreen.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(EachFarmPondDetails_Activity.this, ViewFarmers.class);
+        startActivity(i);
+        finish();
 
-
+    }
 
 
 

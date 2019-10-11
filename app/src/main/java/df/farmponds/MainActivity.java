@@ -96,6 +96,17 @@ public class MainActivity extends AppCompatActivity
     String str_tokenfromprefrence;
 
 
+    //Added by shivaleela
+    public static final String sharedpreferenc_username = "googlelogin_name";
+    public static final String Key_username = "name_googlelogin";
+    SharedPreferences sharedpref_userimage_Obj;
+    public static final String sharedpreferenc_userimage = "googlelogin_img";
+    public static final String key_userimage = "profileimg_googlelogin";
+    SharedPreferences sharedpref_username_Obj;
+
+    String str_loginusername,str_profileimage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -103,9 +114,31 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
+        //Added by shivaleela
+        sharedpref_username_Obj=getSharedPreferences(sharedpreferenc_username, Context.MODE_PRIVATE);
+        str_loginusername = sharedpref_username_Obj.getString(Key_username, "").trim();
+        sharedpref_userimage_Obj=getSharedPreferences(sharedpreferenc_userimage, Context.MODE_PRIVATE);
+        str_profileimage = sharedpref_userimage_Obj.getString(key_userimage, "").trim();
+
+        if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
+        {
+            // call Login Activity
+        }
+        else
+        {
+            Intent i=new Intent(MainActivity.this,Activity_HomeScreen.class);
+            startActivity(i);
+            finish();
+
+            // Stay at the current activity.
+        }
+        /////////////////////////////////////////
+
+
         normallogin_bt =(Button)findViewById(R.id.normallogin_bt);
         username_et =(EditText) findViewById(R.id.username_et);
         google_signin_bt =(SignInButton)findViewById(R.id.google_signin_bt);
+        google_signin_bt.setColorScheme(SignInButton.COLOR_DARK);
 
         context_obj=this.getApplicationContext();
 
@@ -188,7 +221,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct)
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct)
     {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -205,6 +238,16 @@ public class MainActivity extends AppCompatActivity
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseauth_obj.getCurrentUser();
 
+//Added by shivaleela
+                            SharedPreferences.Editor myprefs_Username = sharedpref_username_Obj.edit();
+                            myprefs_Username.putString(Key_username, acct.getDisplayName());
+                            myprefs_Username.apply();
+                            SaveSharedPreference.setUserName(MainActivity.this,account.getDisplayName());
+
+                            SharedPreferences.Editor myprefs_UserImg = sharedpref_userimage_Obj.edit();
+                            myprefs_UserImg.putString(key_userimage, String.valueOf(acct.getPhotoUrl()));
+                            myprefs_UserImg.apply();
+//////////////////////////////////////////
 
 
                             Toast.makeText(MainActivity.this, "User Signed In:"+str_gmailid, Toast.LENGTH_SHORT).show();
@@ -324,7 +367,7 @@ public class MainActivity extends AppCompatActivity
                /* Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                 startActivity(intent);*/
 
-                Intent intent = new Intent(MainActivity.this,EachFarmPondDetails_Activity.class);
+                Intent intent = new Intent(MainActivity.this,Activity_HomeScreen.class);
                 startActivity(intent);
             }
         } catch (JSONException e) {

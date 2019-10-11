@@ -30,6 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity_HomeScreen"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".Activity_MarketingHomeScreen"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".ViewFarmers"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
+
 
 </manifest>

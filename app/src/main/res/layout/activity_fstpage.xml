@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homepagelayout_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorwhite"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".Activity_HomeScreen"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center">
+
+    <include
+        android:id="@+id/toolbar_n_actionbar"
+        layout="@layout/common_titlebar" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="160dp"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:background="@drawable/profile_icone">-->
+<!--    <ImageView-->
+<!--        android:id="@+id/displ_Userimg_IV"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="110dp"-->
+<!--        android:layout_gravity="center_horizontal"/>-->
+<!--    </LinearLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/farmpondbackground">
+        </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="4dp"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_width="1dp"
+        android:id="@+id/displ_Userimg_IV"/>
+
+    <TextView
+        android:id="@+id/dislay_UserName_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text=""
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@color/dark_black_red"/>
+
+  <!--  <View
+        android:layout_width="250dp"
+        android:layout_height="8dp"
+        android:visibility="gone"
+        android:background="@drawable/layout_background" />-->
+
+    <LinearLayout
+        android:id="@+id/layout2id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:padding="5dp"
+        android:background="@color/colorwhite">
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_margin="2dp"-->
+<!--            android:visibility="gone">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/displ_Userimg_IV"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="26dp"-->
+<!--                android:src="@drawable/profileimg"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/dislay_UserName_TV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="sans-serif"-->
+<!--                android:text="hjhhhhjh"-->
+<!--                android:textStyle="bold" />-->
+
+
+<!--        </LinearLayout>-->
+
+
+        <RelativeLayout
+            android:id="@+id/student_registration_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="30dp">
+
+
+            <ImageView
+                android:id="@+id/myImageView"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/farmers" />
+            <!--                android:paddingBottom="20dp"
+            -->
+            <TextView
+                android:id="@+id/myImageViewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/myImageView"
+                android:layout_alignTop="@+id/myImageView"
+                android:layout_alignRight="@+id/myImageView"
+                android:layout_alignBottom="@+id/myImageView"
+                android:layout_marginLeft="10dp"
+                android:gravity="bottom"
+                android:paddingTop="15sp"
+                android:text="Student Registration"
+                android:textColor="#000000"
+                android:textStyle="bold|italic"
+                android:fontFamily="serif"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:background="@color/colorPrimary" />
+
+     <!--   <RelativeLayout
+            android:id="@+id/documentUpload_RL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/myImageView2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:paddingBottom="20dp"
+                android:visibility="gone"
+                android:src="@drawable/documenticon_newtheme" />
+
+            <TextView
+                android:id="@+id/myImageViewText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/myImageView2"
+                android:layout_alignTop="@+id/myImageView2"
+                android:layout_alignRight="@+id/myImageView2"
+                android:layout_alignBottom="@+id/myImageView2"
+                android:layout_marginLeft="15dp"
+                android:gravity="bottom"
+                android:paddingTop="15dp"
+                android:text="Document Upload"
+                android:textColor="#000000"
+                android:textStyle="bold|italic"
+                android:fontFamily="serif"
+                android:visibility="gone"/>
+        </RelativeLayout>-->
+
+      <!--  <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:background="@drawable/layout_background" />
+
+        <RelativeLayout
+            android:id="@+id/scheduler_RL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/myImageView3"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/scheduler_homepage" />
+            &lt;!&ndash;                android:paddingBottom="20dp"
+            &ndash;&gt;
+            <TextView
+                android:id="@+id/myImageViewText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/myImageView3"
+                android:layout_alignTop="@+id/myImageView3"
+                android:layout_alignRight="@+id/myImageView3"
+                android:layout_alignBottom="@+id/myImageView3"
+                android:layout_marginLeft="10dp"
+                android:gravity="bottom"
+                android:paddingTop="15dp"
+                android:text="Scheduler"
+                android:textColor="#000000"
+                android:textStyle="bold|italic"
+                android:fontFamily="serif"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>-->
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/layout1id"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="4dp"-->
+<!--    android:background="@color/white"-->
+<!--    android:orientation="vertical"-->
+<!--    android:visibility="visible"-->
+<!--    tools:context=".Home1"-->
+<!--    android:layout_gravity="center">-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/layout2id"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:weightSum="3"-->
+<!--        android:padding="5dp"-->
+<!--        android:background="@drawable/shadow_new">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_margin="2dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/displ_Userimg_IV"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="26dp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/dislay_UserName_TV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="sans-serif"-->
+<!--                android:text=""-->
+<!--                android:textStyle="bold" />-->
+
+
+<!--        </LinearLayout>-->
+
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rl1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginBottom="30dp">-->
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/myImageView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:src="@drawable/stud_regicon_newtheme" />-->
+<!--&lt;!&ndash;                android:paddingBottom="20dp"-->
+<!--&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/myImageViewText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignLeft="@+id/myImageView"-->
+<!--                android:layout_alignTop="@+id/myImageView"-->
+<!--                android:layout_alignRight="@+id/myImageView"-->
+<!--                android:layout_alignBottom="@+id/myImageView"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:gravity="bottom"-->
+<!--                android:paddingTop="15sp"-->
+<!--                android:text="Student Registration"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold|italic"-->
+<!--                android:fontFamily="serif"/>-->
+<!--        </RelativeLayout>-->
+
+<!--        <View-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:visibility="gone"-->
+<!--            android:background="@drawable/layout_background" />-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rl2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:visibility="gone">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/myImageView2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:paddingBottom="20dp"-->
+<!--                android:visibility="gone"-->
+<!--                android:src="@drawable/documenticon_newtheme" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/myImageViewText2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignLeft="@+id/myImageView2"-->
+<!--                android:layout_alignTop="@+id/myImageView2"-->
+<!--                android:layout_alignRight="@+id/myImageView2"-->
+<!--                android:layout_alignBottom="@+id/myImageView2"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:gravity="bottom"-->
+<!--                android:paddingTop="15dp"-->
+<!--                android:text="Document Upload"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold|italic"-->
+<!--                android:fontFamily="serif"-->
+<!--                android:visibility="gone"/>-->
+<!--        </RelativeLayout>-->
+
+<!--        <View-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:background="@drawable/layout_background" />-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rl3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginTop="30dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/myImageView3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:src="@drawable/schedule_icon_newtheme" />-->
+<!--&lt;!&ndash;                android:paddingBottom="20dp"-->
+<!--&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/myImageViewText3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignLeft="@+id/myImageView3"-->
+<!--                android:layout_alignTop="@+id/myImageView3"-->
+<!--                android:layout_alignRight="@+id/myImageView3"-->
+<!--                android:layout_alignBottom="@+id/myImageView3"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:gravity="bottom"-->
+<!--                android:paddingTop="15dp"-->
+<!--                android:text="Scheduler"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold|italic"-->
+<!--                android:fontFamily="serif"-->
+<!--                android:layout_marginBottom="10dp"/>-->
+<!--        </RelativeLayout>-->
+<!--    </LinearLayout>-->
+<!--</LinearLayout>-->
