@@ -398,9 +398,9 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
 
 
-                String str_image1=arraylist_image1_base64.get(0).toString();
+               /* String str_image1=arraylist_image1_base64.get(0).toString();
                 String str_image2=arraylist_image2_base64.get(0).toString();
-                String str_image3=arraylist_image3_base64.get(0).toString();
+                String str_image3=arraylist_image3_base64.get(0).toString();*/
 
                 params.put("Farmer_ID","1"); // farmerID from previous screen
                 params.put("Width",edit_pondwidth_et.getText().toString());
