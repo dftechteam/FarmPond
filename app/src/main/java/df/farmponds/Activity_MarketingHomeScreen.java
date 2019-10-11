@@ -1,22 +1,16 @@
 package df.farmponds;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -180,7 +174,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
 
                 internetDectector = new Class_InternetDectector(getApplicationContext());
                 isInternetPresent = internetDectector.isConnectingToInternet();
-                Intent i = new Intent(Activity_MarketingHomeScreen.this,ViewFarmers.class);
+                Intent i = new Intent(Activity_MarketingHomeScreen.this, Activity_ViewFarmers.class);
                 startActivity(i);
               //  finish();
 

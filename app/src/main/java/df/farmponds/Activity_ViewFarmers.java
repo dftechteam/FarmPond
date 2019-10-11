@@ -33,8 +33,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -77,9 +75,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -87,7 +83,7 @@ import java.util.Map;
 //import static com.df.farmpond.MainActivity.key_loginuserid;
 //import static com.df.farmpond.MainActivity.sharedpreferenc_loginuserid;
 
-public class ViewFarmers extends AppCompatActivity {
+public class Activity_ViewFarmers extends AppCompatActivity {
 
     public static final String sharedpreferenc_studentid = "studentid_edit";
     public static final String key_studentid = "str_studentID_edit";
@@ -239,7 +235,7 @@ public class ViewFarmers extends AppCompatActivity {
         yearList = new ArrayList<>();
 
         ViewFarmerList_arraylist = new ArrayList<Class_FarmerListDetails>();
-        farmerListViewAdapter = new FarmerListViewAdapter(ViewFarmers.this, ViewFarmerList_arraylist);
+        farmerListViewAdapter = new FarmerListViewAdapter(Activity_ViewFarmers.this, ViewFarmerList_arraylist);
 
         internetDectector = new Class_InternetDectector(getApplicationContext());
         isInternetPresent = internetDectector.isConnectingToInternet();
@@ -519,7 +515,7 @@ public class ViewFarmers extends AppCompatActivity {
 
                 str_selected_farmerID = originalViewFarmerList.get(position).getFarmerid();
                 Log.e("str_selected_farmerID", str_selected_farmerID);
-                Intent i = new Intent(ViewFarmers.this, EachFarmPondDetails_Activity.class);
+                Intent i = new Intent(Activity_ViewFarmers.this, EachFarmPondDetails_Activity.class);
                 SharedPreferences.Editor myprefs_farmerid = sharedpref_farmerid_Obj.edit();
                 myprefs_farmerid.putString(Key_FarmerID, str_selected_farmerID);
                 myprefs_farmerid.apply();
@@ -1365,7 +1361,7 @@ public class ViewFarmers extends AppCompatActivity {
 /////////////////////////////sept18th2019//////////////////////////////////
 
     public void alert() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(ViewFarmers.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(Activity_ViewFarmers.this);
         builder1.setMessage("No Data Found");
         builder1.setCancelable(true);
 
@@ -1374,7 +1370,7 @@ public class ViewFarmers extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent i = new Intent(ViewFarmers.this, Activity_MarketingHomeScreen.class);
+                        Intent i = new Intent(Activity_ViewFarmers.this, Activity_MarketingHomeScreen.class);
                         startActivity(i);
                         finish();
 
@@ -1406,7 +1402,7 @@ public class ViewFarmers extends AppCompatActivity {
 
             case android.R.id.home:
 
-                Intent i = new Intent(ViewFarmers.this, Activity_MarketingHomeScreen.class);
+                Intent i = new Intent(Activity_ViewFarmers.this, Activity_MarketingHomeScreen.class);
                 startActivity(i);
                 finish();
                 break;
@@ -1450,7 +1446,7 @@ public class ViewFarmers extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(ViewFarmers.this, Activity_MarketingHomeScreen.class);
+        Intent i = new Intent(Activity_ViewFarmers.this, Activity_MarketingHomeScreen.class);
         startActivity(i);
         finish();
 
@@ -1764,7 +1760,7 @@ public class ViewFarmers extends AppCompatActivity {
     }
 
     private void GetDropdownValues() {
-        final ProgressDialog dialog = new ProgressDialog(ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
+        final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
         //getting the progressbar
@@ -2029,7 +2025,7 @@ public class ViewFarmers extends AppCompatActivity {
     }
 
     public void GetFarmerDetails() {
-        final ProgressDialog dialog = new ProgressDialog(ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
+        final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
         //getting the progressbar
@@ -2174,7 +2170,7 @@ public class ViewFarmers extends AppCompatActivity {
 
 
     public void SaveFarmerImage() {
-        final ProgressDialog dialog = new ProgressDialog(ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
+        final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
         //getting the progressbar
@@ -2376,12 +2372,12 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
         private void selectImage() {
             final CharSequence[] items = {"Take Photo", "Choose from Library",
                     "Cancel"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(ViewFarmers.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ViewFarmers.this);
             builder.setTitle("Add Photo!");
             builder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int item) {
-                    boolean result = Utility.checkPermission(ViewFarmers.this);
+                    boolean result = Utility.checkPermission(Activity_ViewFarmers.this);
                     if (items[item].equals("Take Photo")) {
                         userChoosenTask = "Take Photo";
                         if (result)
