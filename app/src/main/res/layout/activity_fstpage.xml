@@ -113,8 +113,7 @@
                 android:layout_height="170dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/farmers" />
-            <!--                android:paddingBottom="20dp"
-            -->
+
             <TextView
                 android:id="@+id/myImageViewText"
                 android:layout_width="wrap_content"
