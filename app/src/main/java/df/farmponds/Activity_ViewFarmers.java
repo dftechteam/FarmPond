@@ -89,9 +89,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
     public static final String key_studentid = "str_studentID_edit";
     public static final String sharedpreferenc_studentid_pay = "studentid";
     public static final String key_studentid_pay = "str_studentID";
-    private static final String JSON_LocationURL = "http://apps.dfindia.org/farmapi/location.php";
-    private static final String JSON_FarmerDetailsURL = "http://apps.dfindia.org/farmapi/farm_list.php";
-    private static final String JSON_FarmerImageURL = "http://apps.dfindia.org/farmapi/farmer_image.php";
+
 
     public static final String sharedpreferenc_camera = "cameraflag";
     public static final String key_flagcamera = "flag_camera";
@@ -198,9 +196,21 @@ public class Activity_ViewFarmers extends AppCompatActivity {
     public static final String Key_FarmerID = "farmer_id";
     SharedPreferences sharedpref_farmerid_Obj;
 
+
     private ImageLoadingListener imageListener;
     public DisplayImageOptions displayoption;
     ImageLoader imgLoader = ImageLoader.getInstance();
+
+    int sel_yearsp=0,sel_statesp=0,sel_districtsp=0,sel_taluksp=0,sel_villagesp=0,sel_grampanchayatsp=0;
+
+    public static final String sharedpreferenc_selectedspinner = "sharedpreferenc_selectedspinner";
+    public static final String Key_sel_yearsp = "sel_yearsp";
+    public static final String Key_sel_statesp = "sel_statesp";
+    public static final String Key_sel_districtsp = "sel_districtsp";
+    public static final String Key_sel_taluksp = "sel_taluksp";
+    public static final String Key_sel_villagesp = "sel_villagesp";
+    public static final String Key_sel_grampanchayatsp = "sel_grampanchayatsp";
+    SharedPreferences sharedpref_spinner_Obj;
 
     @SuppressLint("NewApi")
     @Override
@@ -262,6 +272,26 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         str_flagforcamera = sharedpref_camera_Obj.getString(key_flagcamera, "").trim();
 
 
+        sharedpref_spinner_Obj = getSharedPreferences(sharedpreferenc_selectedspinner, Context.MODE_PRIVATE);
+        sel_yearsp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_yearsp, "").trim());
+        sel_statesp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_statesp, "").trim());
+        sel_districtsp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_districtsp, "").trim());
+        sel_taluksp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_taluksp, "").trim());
+        sel_villagesp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_villagesp, "").trim());
+        sel_grampanchayatsp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_grampanchayatsp, "").trim());
+
+
+       /* Intent intent = getIntent();
+        String str_value_constant=intent.getStringExtra("value_constant");
+        if(str_value_constant.equalsIgnoreCase("1")){
+            sel_yearsp=Integer.parseInt(intent.getStringExtra("sel_yearsp"));
+            sel_statesp=Integer.parseInt(intent.getStringExtra("sel_statesp"));
+            sel_districtsp=Integer.parseInt(intent.getStringExtra("sel_districtsp"));
+            sel_taluksp=Integer.parseInt(intent.getStringExtra("sel_taluksp"));
+            sel_villagesp=Integer.parseInt(intent.getStringExtra("sel_villagesp"));
+            sel_grampanchayatsp=Integer.parseInt(intent.getStringExtra("sel_grampanchayatsp"));
+        }*/
+
         //   searchautofill = (AutoCompleteTextView) findViewById(R.id.Search);
         //  searchautofill.setInputType(InputType.TYPE_NULL);
 //        Typeface typefacereg = Typeface.createFromAsset(getAssets(), "fonts/laouiregular.ttf");
@@ -272,6 +302,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         farmer_listview = (ListView) findViewById(R.id.farmer_LISTVIEW);
         yearlist_SP = (Spinner) findViewById(R.id.yearlist_farmer_SP);
         statelist_SP = (Spinner) findViewById(R.id.statelist_farmer_SP);
+
         districtlist_SP = (Spinner) findViewById(R.id.districtlist_farmer_SP);
         taluklist_SP = (Spinner) findViewById(R.id.taluklist_farmer_SP);
         villagelist_SP = (Spinner) findViewById(R.id.villagelist_farmer_SP);
@@ -365,6 +396,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_yearDetails = (Class_YearListDetails) yearlist_SP.getSelectedItem();
                 sp_stryear_ID = Obj_Class_yearDetails.getYearID().toString();
                 selected_year = yearlist_SP.getSelectedItem().toString();
+                sel_yearsp = yearlist_SP.getSelectedItemPosition();
                 // Update_stateid_spinner(sp_stryear_ID);
                 //  Log.e("sp_stryear_ID", " : " + sp_stryear_ID);
 
@@ -386,6 +418,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_stateDetails = (Class_StateListDetails) statelist_SP.getSelectedItem();
                 sp_strstate_ID = Obj_Class_stateDetails.getState_id().toString();
                 selected_stateName = statelist_SP.getSelectedItem().toString();
+                sel_statesp = statelist_SP.getSelectedItemPosition();
 
                 Update_districtid_spinner(sp_strstate_ID);
                 //  Log.e("selected_stateName", " : " + selected_stateName);
@@ -407,7 +440,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 sp_strdistrict_ID = Obj_Class_DistrictDetails.getDistrict_id();
                 sp_strdistrict_state_ID = Obj_Class_DistrictDetails.getState_id();
                 selected_district = districtlist_SP.getSelectedItem().toString();
-
+                sel_districtsp = districtlist_SP.getSelectedItemPosition();
 //                Log.i("selected_district", " : " + selected_district);
 //                Log.i("sp_strdistrict_state_ID", " : " + sp_strdistrict_state_ID);
                 //Log.e("sp_strdistrict_ID", " : " + sp_strdistrict_ID);
@@ -434,7 +467,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_TalukDetails = (Class_TalukListDetails) taluklist_SP.getSelectedItem();
                 sp_strTaluk_ID = Obj_Class_TalukDetails.getTaluk_id();
                 selected_taluk = taluklist_SP.getSelectedItem().toString();
-
+                sel_taluksp = taluklist_SP.getSelectedItemPosition();
                 // Update_VillageId_spinner("5433");//5516,sp_strTaluk_ID
 //                Log.i("selected_taluk", " : " + selected_taluk);
 //
@@ -461,6 +494,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_VillageListDetails = (Class_VillageListDetails) villagelist_SP.getSelectedItem();
                 sp_strVillage_ID = Obj_Class_VillageListDetails.getVillage_id();
                 selected_village = villagelist_SP.getSelectedItem().toString();
+
+                sel_villagesp = villagelist_SP.getSelectedItemPosition();
                 // Log.i("selected_village", " : " + selected_village);
 
                 //  Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,sp_strdistrict_ID,sp_strTaluk_ID,sp_strVillage_ID,"");
@@ -483,6 +518,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_GramanchayatDetails = (Class_GrampanchayatListDetails) grampanchayatlist_SP.getSelectedItem();
                 sp_strgrampanchayat_ID = Obj_Class_GramanchayatDetails.getGramanchayat_id().toString();
                 selected_grampanchayat = Obj_Class_GramanchayatDetails.getGramanchayat_name().toString();
+                sel_grampanchayatsp = grampanchayatlist_SP.getSelectedItemPosition();
 
                 Log.e("sp_stryear_ID..", sp_stryear_ID);
                 Log.e("sp_strstate_ID..", sp_strstate_ID);
@@ -517,9 +553,27 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 str_selected_farmerID = originalViewFarmerList.get(position).getFarmerid();
                 Log.e("str_selected_farmerID", str_selected_farmerID);
                 Intent i = new Intent(Activity_ViewFarmers.this, EachFarmPondDetails_Activity.class);
+               /* i.putExtra("sel_yearsp",String.valueOf(sel_yearsp));
+                i.putExtra("sel_statesp",String.valueOf(sel_statesp));
+                i.putExtra("sel_districtsp",String.valueOf(sel_districtsp));
+                i.putExtra("sel_taluksp",String.valueOf(sel_taluksp));
+                i.putExtra("sel_villagesp",String.valueOf(sel_villagesp));
+                i.putExtra("sel_grampanchayatsp",String.valueOf(sel_grampanchayatsp));
+*/
                 SharedPreferences.Editor myprefs_farmerid = sharedpref_farmerid_Obj.edit();
                 myprefs_farmerid.putString(Key_FarmerID, str_selected_farmerID);
                 myprefs_farmerid.apply();
+
+                SharedPreferences.Editor myprefs_spinner = sharedpref_spinner_Obj.edit();
+                myprefs_spinner.putString(Key_sel_yearsp, String.valueOf(sel_yearsp));
+                myprefs_spinner.putString(Key_sel_statesp, String.valueOf(sel_statesp));
+                myprefs_spinner.putString(Key_sel_districtsp, String.valueOf(sel_districtsp));
+                myprefs_spinner.putString(Key_sel_taluksp, String.valueOf(sel_taluksp));
+                myprefs_spinner.putString(Key_sel_villagesp, String.valueOf(sel_villagesp));
+                myprefs_spinner.putString(Key_sel_grampanchayatsp, String.valueOf(sel_grampanchayatsp));
+
+                myprefs_spinner.apply();
+
                 startActivity(i);
                // finish();
 
@@ -813,6 +867,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_yearDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             yearlist_SP.setAdapter(dataAdapter);
+            yearlist_SP.setSelection(sel_yearsp);
         }
 
     }
@@ -851,6 +906,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_stateDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             statelist_SP.setAdapter(dataAdapter);
+            statelist_SP.setSelection(sel_statesp);
         }
 
     }
@@ -888,6 +944,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_stateDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             statelist_SP.setAdapter(dataAdapter);
+            statelist_SP.setSelection(sel_statesp);
         }
 
     }
@@ -927,6 +984,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_DistrictListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             districtlist_SP.setAdapter(dataAdapter);
+            districtlist_SP.setSelection(sel_districtsp);
         }
 
     }
@@ -962,6 +1020,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_DistrictListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             districtlist_SP.setAdapter(dataAdapter);
+            districtlist_SP.setSelection(sel_districtsp);
         }
 
     }
@@ -999,6 +1058,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_TalukListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             taluklist_SP.setAdapter(dataAdapter);
+            taluklist_SP.setSelection(sel_taluksp);
+
         }
 
     }
@@ -1035,6 +1096,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_TalukListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             taluklist_SP.setAdapter(dataAdapter);
+            taluklist_SP.setSelection(sel_taluksp);
         }
 
     }
@@ -1072,6 +1134,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_VillageListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             villagelist_SP.setAdapter(dataAdapter);
+            villagelist_SP.setSelection(sel_villagesp);
         }
 
     }
@@ -1107,6 +1170,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_VillageListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             villagelist_SP.setAdapter(dataAdapter);
+            villagelist_SP.setSelection(sel_villagesp);
 
         }
 
@@ -1145,6 +1209,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_GrampanchayatListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             grampanchayatlist_SP.setAdapter(dataAdapter);
+            grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
+
         }
 
     }
@@ -1180,7 +1246,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_GrampanchayatListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             grampanchayatlist_SP.setAdapter(dataAdapter);
-
+            grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
         }
 
     }
@@ -1299,6 +1365,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
                 String str_FarmerName = cursor1.getString(cursor1.getColumnIndex("DispFarmerTable_FarmerName"));
                 String str_Farmercode = cursor1.getString(cursor1.getColumnIndex("DispFarmerTable_Farmer_Code"));
+                String str_FarmerImage = cursor1.getString(cursor1.getColumnIndex("DispFarmerTable_FarmerImage"));
 
 
                 arrayObj_Class_FarmerListDetails2[i] = innerObj_Class_SandboxList;
@@ -1319,12 +1386,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
                 ViewFarmerList_arraylist.add(item);
                 Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
-                Log.e("str_FarmerName2id", str_FarmerName);
+                Log.e("str_FarmerImage", str_FarmerImage);
 
                 i++;
 
@@ -1773,9 +1835,10 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
+        String str_JSON_LocationURL = Class_URL.JSON_LocationURL.toString().trim();
 
         //creating a string request to send request to the url
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_LocationURL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, str_JSON_LocationURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -2038,9 +2101,11 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
+        String str_JSON_FarmerDetailsURL = Class_URL.JSON_FarmerDetailsURL.toString().trim();
+
 
         //creating a string request to send request to the url
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_FarmerDetailsURL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, str_JSON_FarmerDetailsURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -2088,7 +2153,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                                         farmerObject.getString("panchayat_id"),
                                         farmerObject.getString("farmer_id"),
                                         farmerObject.getString("farmer_code"),
-                                        farmerObject.getString("farmer_name"),farmerObject.getString("farmer_image"));//farmer_image
+                                        farmerObject.getString("farmer_name"),
+                                        farmerObject.getString("farmer_image"));//farmer_image
 
                                 strArray_farmername[i] = farmerObject.getString("farmer_name");//farmer_name
                                 StrArray_farmercode[i] = farmerObject.getString("farmer_code");
@@ -2109,7 +2175,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 //                                Log.e("panchayat_id.", farmerObject.getString("panchayat_id"));
 //                                Log.e("village_id.", farmerObject.getString("village_id"));
 //                                Log.e("farmer_code.", farmerObject.getString("farmer_code"));
-//                                Log.e("farmer_name.", farmerObject.getString("farmer_name"));
+                                Log.e("farmer_image.", farmerObject.getString("farmer_image"));
 
                                 /*
                                 [{"st_id":"25","dist_id":"635","tlk_id":"5663","village_id":"626707",
@@ -2158,7 +2224,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         Log.e("error", error.toString());
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -2169,7 +2237,17 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+public void Update_ImageLocaly(){
+    SQLiteDatabase db_viewfarmerlist = this.openOrCreateDatabase("FarmerListdb", Context.MODE_PRIVATE, null);
+    db_viewfarmerlist.execSQL("CREATE TABLE IF NOT EXISTS ViewFarmerList(DispFarmerTable_YearID VARCHAR,DispFarmerTable_StateID VARCHAR,DispFarmerTable_DistrictID VARCHAR,DispFarmerTable_TalukID VARCHAR,DispFarmerTable_VillageID VARCHAR,DispFarmerTable_GrampanchayatID VARCHAR,DispFarmerTable_FarmerID VARCHAR,DispFarmerTable_Farmer_Code VARCHAR,DispFarmerTable_FarmerName VARCHAR,DispFarmerTable_FarmerImage VARCHAR);");
 
+
+    String SQLiteQuery = "UPDATE ViewFarmerList SET DispFarmerTable_FarmerImage = "+str_img+" WHERE DispFarmerTable_FarmerID = "+ str_selected_farmerID_forimagesaving;
+
+    db_viewfarmerlist.execSQL(SQLiteQuery);
+
+    db_viewfarmerlist.close();
+}
     public void SaveFarmerImage() {
         final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
@@ -2183,9 +2261,10 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
+        String str_JSON_FarmerImageURL = Class_URL.JSON_FarmerImageURL.toString().trim();
 
         //creating a string request to send request to the url
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_FarmerImageURL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, str_JSON_FarmerImageURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -2201,7 +2280,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         Log.e("error", error.toString());
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
+
                     }
                 }){
 
@@ -2234,6 +2315,10 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
                 Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_LONG).show();
             }
             if (jsonObject.getString("statusMessage").equalsIgnoreCase("Farmer_ID Empty")) {
+
+                Toast.makeText(getApplicationContext(), "Sorry,could not save image", Toast.LENGTH_LONG).show();
+            }
+            if (jsonObject.getString("statusMessage").equalsIgnoreCase("failed")) {
 
                 Toast.makeText(getApplicationContext(), "Sorry,could not save image", Toast.LENGTH_LONG).show();
             }
@@ -2485,6 +2570,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
         holder.farmerimage_iv.setImageBitmap(bm);
         if(isInternetPresent){
             SaveFarmerImage();
+           // Update_ImageLocaly();
         }else{
 
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
@@ -2515,6 +2601,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
         BitMapToString(thumbnail);
         if(isInternetPresent){
             SaveFarmerImage();
+         //   Update_ImageLocaly();
         }else{
 
 

@@ -61,6 +61,17 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
     public static final String sharedpreferenc_farmerid = "sharedpreference_farmer_id";
     public static final String Key_FarmerID = "farmer_id";
 
+    String sel_yearsp,sel_statesp,sel_districtsp,sel_taluksp,sel_villagesp,sel_grampanchayatsp;
+
+    public static final String sharedpreferenc_selectedspinner = "sharedpreferenc_selectedspinner";
+    public static final String Key_sel_yearsp = "sel_yearsp";
+    public static final String Key_sel_statesp = "sel_statesp";
+    public static final String Key_sel_districtsp = "sel_districtsp";
+    public static final String Key_sel_taluksp = "sel_taluksp";
+    public static final String Key_sel_villagesp = "sel_villagesp";
+    public static final String Key_sel_grampanchayatsp = "sel_grampanchayatsp";
+    SharedPreferences sharedpref_spinner_Obj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -90,6 +101,30 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         sharedpref_farmerid_Obj=getSharedPreferences(sharedpreferenc_farmerid, Context.MODE_PRIVATE);
         str_farmerID = sharedpref_farmerid_Obj.getString(Key_FarmerID, "").trim();
 
+        sharedpref_spinner_Obj = getSharedPreferences(sharedpreferenc_selectedspinner, Context.MODE_PRIVATE);
+        sel_yearsp = sharedpref_spinner_Obj.getString(Key_sel_yearsp, "").trim();
+        sel_statesp = sharedpref_spinner_Obj.getString(Key_sel_statesp, "").trim();
+        sel_districtsp = sharedpref_spinner_Obj.getString(Key_sel_districtsp, "").trim();
+        sel_taluksp = sharedpref_spinner_Obj.getString(Key_sel_taluksp, "").trim();
+        sel_villagesp = sharedpref_spinner_Obj.getString(Key_sel_villagesp, "").trim();
+        sel_grampanchayatsp = sharedpref_spinner_Obj.getString(Key_sel_grampanchayatsp, "").trim();
+
+       /* Intent intent = getIntent();
+        sel_yearsp=intent.getStringExtra("sel_yearsp");
+        sel_statesp=intent.getStringExtra("sel_statesp");
+        sel_districtsp=intent.getStringExtra("sel_districtsp");
+        sel_taluksp=intent.getStringExtra("sel_taluksp");
+        sel_villagesp=intent.getStringExtra("sel_villagesp");
+        sel_grampanchayatsp=intent.getStringExtra("sel_grampanchayatsp");*/
+
+        /*Intent intent = getIntent();
+        sel_yearsp=intent.getStringExtra("sel_yearsp");
+        sel_statesp=intent.getStringExtra("sel_statesp");
+        sel_districtsp=intent.getStringExtra("sel_districtsp");
+        sel_taluksp=intent.getStringExtra("sel_taluksp");
+        sel_villagesp=intent.getStringExtra("sel_villagesp");
+        sel_grampanchayatsp=intent.getStringExtra("sel_grampanchayatsp");
+*/
         AsyncTask_fetch_farmponddetails();
 
 
@@ -472,8 +507,24 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i=new Intent(EachFarmPondDetails_Activity.this,Activity_ViewFarmers.class);
+     /*   i.putExtra("value_constant","1");
+        i.putExtra("sel_yearsp",sel_yearsp);
+        i.putExtra("sel_statesp",sel_statesp);
+        i.putExtra("sel_districtsp",sel_districtsp);
+        i.putExtra("sel_taluksp",sel_taluksp);
+        i.putExtra("sel_villagesp",sel_villagesp);
+        i.putExtra("sel_grampanchayatsp",sel_grampanchayatsp);*/
+        SharedPreferences.Editor myprefs_spinner = sharedpref_spinner_Obj.edit();
+        myprefs_spinner.putString(Key_sel_yearsp, sel_yearsp);
+        myprefs_spinner.putString(Key_sel_statesp, sel_statesp);
+        myprefs_spinner.putString(Key_sel_districtsp, sel_districtsp);
+        myprefs_spinner.putString(Key_sel_taluksp, sel_taluksp);
+        myprefs_spinner.putString(Key_sel_villagesp, sel_villagesp);
+        myprefs_spinner.putString(Key_sel_grampanchayatsp, sel_grampanchayatsp);
+
+        myprefs_spinner.apply();
         startActivity(i);
-       // finish();
+        finish();
     }
 
     @Override
@@ -487,8 +538,9 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
         if (id == android.R.id.home) {
             //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(EachFarmPondDetails_Activity.this, Activity_ViewFarmers.class);
+            i.putExtra("value_constant","1");
             startActivity(i);
-          //  finish();
+            finish();
             return true;
         }
 

@@ -107,7 +107,7 @@ public class Activity_HomeScreen extends AppCompatActivity implements GoogleApiC
         str_flag = sharedpref_flag_Obj.getString(key_flag, "").trim();
 
 
-        if(str_flag.equals("1")) {
+        if(!str_flag.equals("1")) {
             if (SaveSharedPreference.getUserName(Activity_HomeScreen.this).length() == 0) {
 //                Intent i = new Intent(Activity_HomeScreen.this, NormalLogin.class);
 //                startActivity(i);
