@@ -3,8 +3,10 @@ package df.farmponds;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,12 +68,19 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
     ArrayList<String> arraylist_image2_base64 = new ArrayList<>();
     ArrayList<String> arraylist_image3_base64 = new ArrayList<>();
 
+    ArrayList<String> arraylist_image1_ID_base64 = new ArrayList<>();
+    ArrayList<String> arraylist_image2_ID_base64 = new ArrayList<>();
+    ArrayList<String> arraylist_image3_ID_base64 = new ArrayList<>();
+
     String str_image1,str_image2,str_image3;
 
     Class_farmponddetails class_farmponddetails_obj;
     String str_farmpondbaseimage_url,str_cancelclicked;
 
-
+    SharedPreferences sharedpref_farmerid_Obj;
+    String str_farmerID;
+    public static final String sharedpreferenc_farmerid = "sharedpreference_farmer_id";
+    public static final String Key_FarmerID = "farmer_id";
 
 
     @Override
@@ -97,15 +107,16 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
         add_newfarmpond_iv.setVisibility(View.GONE);
 
 
+        sharedpref_farmerid_Obj=getSharedPreferences(sharedpreferenc_farmerid, Context.MODE_PRIVATE);
+        str_farmerID = sharedpref_farmerid_Obj.getString(Key_FarmerID, "").trim();
 
 
+    //fetch the details previous activity
         Intent intent = getIntent();
-
         String jsonString = intent.getStringExtra("jsonObject");
         Log.e("intent",jsonString);
-
-
         class_farmponddetails_obj = new Gson().fromJson(jsonString, Class_farmponddetails.class);
+        //fetch the details previous activity
 
         String str_farmername =class_farmponddetails_obj.getFarmer_Name().toString() ;
 
@@ -135,6 +146,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
         str_image1=str_image2=str_image3="false";
         str_cancelclicked="false";
         edit_ponddetails_farmername_et.setText(str_farmername);
+
 
 
         Assign_farmponddetails(); // Assign the data to fields
@@ -260,7 +272,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                                 {
 
                                     edit_removeimage1_ib.setVisibility(View.VISIBLE);
-                                    arraylist_image1_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
+                                    arraylist_image1_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
                                 }
                                 @Override
                                 public void onError(Exception e) {
@@ -275,7 +287,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                             @Override
                             public void onSuccess() {
                                 edit_removeimage2_ib.setVisibility(View.VISIBLE);
-                                arraylist_image2_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
+                                arraylist_image2_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
                             }
                             @Override
                             public void onError(Exception e) {
@@ -290,7 +302,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
                                     edit_removeimage3_ib.setVisibility(View.VISIBLE);
-                                    arraylist_image3_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
+                                    arraylist_image3_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
                                 }
                                 @Override
                                 public void onError(Exception e) {
@@ -402,7 +414,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 String str_image2=arraylist_image2_base64.get(0).toString();
                 String str_image3=arraylist_image3_base64.get(0).toString();*/
 
-                params.put("Farmer_ID","1"); // farmerID from previous screen
+                params.put("Farmer_ID",str_farmerID); // farmerID from previous screen
                 params.put("Width",edit_pondwidth_et.getText().toString());
                 params.put("Height",edit_pondheight_et.getText().toString());
                 params.put("Depth",edit_ponddepth_et.getText().toString());
@@ -437,6 +449,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
             if (jsonObject.getString("statusMessage").equalsIgnoreCase("Success"))
             {
 
+                Toast.makeText(getApplicationContext(),"Edition Updated Successfully",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditFarmPondDetails_Activity.this,EachFarmPondDetails_Activity.class);
                 startActivity(intent);
                 finish();
@@ -664,5 +677,43 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
         });
         alert.show();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+
+        if (id == android.R.id.home) {
+            //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+           /* Intent i = new Intent(EditFarmPondDetails_Activity.this, EachFarmPondDetails_Activity.class);
+            startActivity(i);
+             finish();*/
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
 }//end of class

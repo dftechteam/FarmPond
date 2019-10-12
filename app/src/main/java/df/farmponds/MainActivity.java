@@ -322,8 +322,8 @@ public class MainActivity extends AppCompatActivity
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
 
-              //  params.put("email",str_gmailid);// for dynamic
-                params.put("email","eventtest464@gmail.com");
+               params.put("email",str_gmailid);// for dynamic
+               // params.put("email","eventtest464@gmail.com");
 
                 return params;
             }
