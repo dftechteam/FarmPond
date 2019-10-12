@@ -2378,7 +2378,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
             builder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int item) {
-                    boolean result = Utility.checkPermission(Activity_ViewFarmers.this);
+                    boolean result = Class_utility.checkPermission(Activity_ViewFarmers.this);
                     if (items[item].equals("Take Photo")) {
                         userChoosenTask = "Take Photo";
                         if (result)
@@ -2432,7 +2432,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+            case Class_utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (userChoosenTask.equals("Take Photo"))
                         cameraIntent();

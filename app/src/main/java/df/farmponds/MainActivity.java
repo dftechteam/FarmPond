@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseauth_obj.getCurrentUser();
 
-//Added by shivaleela
+              //Added by shivaleela
                             SharedPreferences.Editor myprefs_Username = sharedpref_username_Obj.edit();
                             myprefs_Username.putString(Key_username, acct.getDisplayName());
                             myprefs_Username.apply();
