@@ -298,7 +298,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
                 SaveSharedPreference.setUserName(getApplicationContext(),"");
 
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("logout_key1", "yes");
+                i.putExtra("Key_Logout", "yes");
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 finish();

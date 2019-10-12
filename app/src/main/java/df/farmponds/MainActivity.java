@@ -158,6 +158,23 @@ public class MainActivity extends AppCompatActivity
 
 
 
+      // Signout function
+
+        Intent myIntent = getIntent();
+
+        if(myIntent!=null)
+        {
+
+            String logout="no";
+            logout = myIntent.getStringExtra("Key_Logout");
+            if(logout!=null && (logout.equalsIgnoreCase("yes")))
+            {
+                signOut();
+            }
+        }
+
+        // Signout function
+
 
         google_signin_bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -379,7 +396,16 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+    private void signOut() {
+        googlesigninclient_obj.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        Toast.makeText(MainActivity.this,"Sigined Out Successfully",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 
 }// end of class
