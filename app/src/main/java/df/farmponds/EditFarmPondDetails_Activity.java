@@ -239,7 +239,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        //  AsyncTask_fetch_farmponddetails();
+
 
     }// end of oncreate
 
@@ -298,7 +298,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 {
                     Picasso.get()
                             .load(str_farmpondimageurl)
-                            .into(edit_pond_image2_iv, new Callback() {
+                            .into(edit_pond_image3_iv, new Callback() {
                                 @Override
                                 public void onSuccess() {
                                     edit_removeimage3_ib.setVisibility(View.VISIBLE);
@@ -410,9 +410,21 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
 
 
-               /* String str_image1=arraylist_image1_base64.get(0).toString();
-                String str_image2=arraylist_image2_base64.get(0).toString();
-                String str_image3=arraylist_image3_base64.get(0).toString();*/
+
+                String str_imageID_1,str_imageID_2,str_imageID_3;
+
+               if(arraylist_image1_ID_base64.size()>0)
+               { str_imageID_1=arraylist_image1_ID_base64.get(0).toString();}
+               else{ str_imageID_1="";}
+
+                if(arraylist_image2_ID_base64.size()>0)
+                { str_imageID_2=arraylist_image2_ID_base64.get(0).toString();}
+                else{ str_imageID_2="";}
+
+                if(arraylist_image3_ID_base64.size()>0)
+                { str_imageID_3=arraylist_image3_ID_base64.get(0).toString();}
+                else{ str_imageID_3="";}
+
 
                 params.put("Farmer_ID",str_farmerID); // farmerID from previous screen
                 params.put("Width",edit_pondwidth_et.getText().toString());
@@ -420,12 +432,13 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 params.put("Depth",edit_ponddepth_et.getText().toString());
                 params.put("Latitude","");
                 params.put("Longitude","");
-               // image_id1, image_id2, image_id3
-                params.put("image_link_1",arraylist_image1_base64.get(1).toString());
+                params.put("image_link_1",arraylist_image1_base64.get(0).toString());
+                params.put("image_link_2",arraylist_image2_base64.get(0).toString());
+                params.put("image_link_3",arraylist_image3_base64.get(0).toString());
 
-                params.put("image_link_2",arraylist_image2_base64.get(1).toString());
-                params.put("image_link_3",arraylist_image3_base64.get(1).toString());
-                params.put("image_id1",arraylist_image1_base64.get(0).toString());
+                params.put("image_id1",str_imageID_1);
+                params.put("image_id2",str_imageID_2);
+                params.put("image_id3",str_imageID_3);
 
 
                 //Log.e("image", arraylist_image1_base64.get(0).toString());
