@@ -49,6 +49,16 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
     SQLiteDatabase db;
     int i = 0;
     ImageButton notupload_ib;
+
+    public static final String sharedpreferenc_selectedspinner = "sharedpreferenc_selectedspinner";
+    public static final String Key_sel_yearsp = "sel_yearsp";
+    public static final String Key_sel_statesp = "sel_statesp";
+    public static final String Key_sel_districtsp = "sel_districtsp";
+    public static final String Key_sel_taluksp = "sel_taluksp";
+    public static final String Key_sel_villagesp = "sel_villagesp";
+    public static final String Key_sel_grampanchayatsp = "sel_grampanchayatsp";
+    SharedPreferences sharedpref_spinner_Obj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -64,6 +74,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         sharedpref_validMailID_Obj=getSharedPreferences(sharedpreferenc_mailbook, Context.MODE_PRIVATE);
+        sharedpref_spinner_Obj = getSharedPreferences(sharedpreferenc_selectedspinner, Context.MODE_PRIVATE);
 
         applicationdetails_ib=(ImageView)findViewById(R.id.applicationdetails_IB);
 
@@ -175,6 +186,16 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
                 internetDectector = new Class_InternetDectector(getApplicationContext());
                 isInternetPresent = internetDectector.isConnectingToInternet();
                 Intent i = new Intent(Activity_MarketingHomeScreen.this, Activity_ViewFarmers.class);
+                /*i.putExtra("value_constant","0");*/
+                SharedPreferences.Editor myprefs_spinner = sharedpref_spinner_Obj.edit();
+                myprefs_spinner.putString(Key_sel_yearsp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_statesp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_districtsp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_taluksp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_villagesp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_grampanchayatsp, String.valueOf(0));
+
+                myprefs_spinner.apply();
                 startActivity(i);
               //  finish();
 
