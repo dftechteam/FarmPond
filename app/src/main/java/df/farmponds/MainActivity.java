@@ -387,6 +387,10 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this,Activity_HomeScreen.class);
                 startActivity(intent);
             }
+            else{
+                signOut_InvalidUser();
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -407,5 +411,18 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
+
+
+
+    private void signOut_InvalidUser() {
+        googlesigninclient_obj.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        Toast.makeText(MainActivity.this,"Sigined Out: InValid User",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 }// end of class

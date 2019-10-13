@@ -1,5 +1,6 @@
 package df.farmponds;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -44,6 +46,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,6 +79,8 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
     ArrayList<String> arraylist_image3_ID_base64 = new ArrayList<>();
 
     String str_image1,str_image2,str_image3;
+    String str_Is_image1,str_Is_image2,str_Is_image3;
+    Bitmap mIcon11;
 
     Class_farmponddetails class_farmponddetails_obj;
     String str_farmpondbaseimage_url,str_cancelclicked;
@@ -147,12 +153,20 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
 
 
         str_image1=str_image2=str_image3="false";
+        str_Is_image1=str_Is_image2=str_Is_image3="false";//for conversion to byte64 string
         str_cancelclicked="false";
         edit_ponddetails_farmername_et.setText(str_farmername);
 
 
 
-        Assign_farmponddetails(); // Assign the data to fields
+
+
+
+
+       Assign_farmponddetails(); // Assign the data to fields
+
+
+       Convert_urlimagetobyte64();
 
 
 
@@ -278,17 +292,31 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                                     edit_removeimage1_ib.setVisibility(View.VISIBLE);
                                     arraylist_image1_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
 
-                                    try {
+
+                                  /*  str_Is_image1="true";
+                                    AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                                    task.execute();*/
+
+
+                                  /*  try {
                                         URL url = new URL(str_farmpondimageurl);
-                                        Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                        connection.setDoInput(true);
+                                        connection.connect();
+                                        InputStream input = connection.getInputStream();
+                                        Bitmap myBitmap = BitmapFactory.decodeStream(input);
+
                                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                        image.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                                        myBitmap.compress(Bitmap.CompressFormat.PNG, 60, baos);
                                         byte[] byteArray = baos.toByteArray();
                                         str_base64imagestring = Base64.encodeToString(byteArray, Base64.DEFAULT);
                                         arraylist_image1_base64.add(str_base64imagestring);
-                                    } catch(IOException e) {
-                                        System.out.println(e);
-                                    }
+
+                                    } catch (IOException e) {
+
+                                    }*/
+
+
                                 }
                                 @Override
                                 public void onError(Exception e) {
@@ -305,17 +333,10 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                                 edit_removeimage2_ib.setVisibility(View.VISIBLE);
                                 arraylist_image2_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
 
-                                try {
-                                    URL url = new URL(str_farmpondimageurl);
-                                    Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                    image.compress(Bitmap.CompressFormat.PNG, 60, baos);
-                                    byte[] byteArray = baos.toByteArray();
-                                    str_base64imagestring = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                                    arraylist_image2_base64.add(str_base64imagestring);
-                                } catch(IOException e) {
-                                    System.out.println(e);
-                                }
+
+                             /*   str_Is_image2="true";
+                                AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                                task.execute();*/
                             }
                             @Override
                             public void onError(Exception e) {
@@ -332,17 +353,9 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                                     edit_removeimage3_ib.setVisibility(View.VISIBLE);
                                     arraylist_image3_ID_base64.add(class_farmponddetails_obj.getClass_farmpondimages_obj().get(0).getImage_ID().toString());
 
-                                    try {
-                                        URL url = new URL(str_farmpondimageurl);
-                                        Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                        image.compress(Bitmap.CompressFormat.PNG, 60, baos);
-                                        byte[] byteArray = baos.toByteArray();
-                                        str_base64imagestring = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                                        arraylist_image3_base64.add(str_base64imagestring);
-                                    } catch(IOException e) {
-                                        System.out.println(e);
-                                    }
+                                  /* str_Is_image3="true";
+                                    AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                                    task.execute();*/
 
                                 }
                                 @Override
@@ -738,6 +751,196 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
+    public void Convert_urlimagetobyte64() {
+
+        if (class_farmponddetails_obj.getClass_farmpondimages_obj().size() > 0) {
+            for (int j = 0; j < class_farmponddetails_obj.getClass_farmpondimages_obj().size(); j++)
+            {
+
+                Log.e("imageurl", str_farmpondbaseimage_url + class_farmponddetails_obj.getClass_farmpondimages_obj().get(j).getImage_url().toString());
+
+                str_farmpondimageurl = str_farmpondbaseimage_url + class_farmponddetails_obj.getClass_farmpondimages_obj().get(j).getImage_url().toString();
+
+                if(j==0) {
+                    str_Is_image1 = "true";
+                    AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                    task.execute();
+                }else if(j==1)
+                {
+                    str_Is_image2 = "true";
+                    AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                    task.execute();
+                }else if(j==2)
+                {
+                    str_Is_image3 = "true";
+                    AsyncCallWS_imagetobyte64 task = new AsyncCallWS_imagetobyte64(EditFarmPondDetails_Activity.this);
+                    task.execute();
+                }
+            }
+
+        }
+    }
+
+
+
+    private class AsyncCallWS_imagetobyte64 extends AsyncTask<String, Void, Void> {
+        ProgressDialog dialog;
+
+        Context context;
+
+        protected void onPreExecute() {
+            //  Log.i(TAG, "onPreExecute---tab2");
+            dialog.setMessage("Please wait..");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            //Log.i(TAG, "onProgressUpdate---tab2");
+        }
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+            Log.i("DFFarmPond", "doInBackground");
+
+
+            urltobyte64();
+
+
+            return null;
+        }
+
+        public AsyncCallWS_imagetobyte64(Context context1) {
+            context = context1;
+            dialog = new ProgressDialog(context1);
+        }
+
+        @SuppressLint("WrongThread")
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            dialog.dismiss();
+
+
+            if(str_Is_image1.equalsIgnoreCase("true"))
+            {
+
+                str_Is_image1="false";
+
+                arraylist_image1_base64.clear();
+                edit_pond_image1_iv.setImageBitmap(mIcon11);
+                edit_removeimage1_ib.setVisibility(View.VISIBLE);
+                str_image1 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image1_base64.add(str_base64imagestring);
+
+
+            }else if(str_Is_image2.equalsIgnoreCase("true"))
+            {
+
+                str_Is_image2="false";
+
+                arraylist_image2_base64.clear();
+                edit_pond_image2_iv.setImageBitmap(mIcon11);
+                edit_removeimage2_ib.setVisibility(View.VISIBLE);
+                str_image2 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image2_base64.add(str_base64imagestring);
+
+            }
+            else if(str_Is_image3.equalsIgnoreCase("true"))
+            {
+                str_Is_image3="false";
+
+                arraylist_image3_base64.clear();
+                edit_pond_image3_iv.setImageBitmap(mIcon11);
+                edit_removeimage3_ib.setVisibility(View.VISIBLE);
+                str_image3 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image3_base64.add(str_base64imagestring);
+            }else{
+
+            }
+
+
+        }//end of OnPostExecute
+
+    }// end Async task
+
+
+    public void urltobyte64()
+    {
+
+        try {
+
+            InputStream in = new java.net.URL(str_farmpondimageurl).openStream();
+             mIcon11 = BitmapFactory.decodeStream(in);
+
+
+           /* if(str_Is_image1.equalsIgnoreCase("true"))
+            {
+
+                str_Is_image1="false";
+
+                arraylist_image1_base64.clear();
+                edit_pond_image1_iv.setImageBitmap(mIcon11);
+                edit_removeimage1_ib.setVisibility(View.VISIBLE);
+                str_image1 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image1_base64.add(str_base64imagestring);
+
+
+            }else if(str_Is_image2.equalsIgnoreCase("true"))
+            {
+
+                str_Is_image2="false";
+
+                arraylist_image2_base64.clear();
+                edit_pond_image2_iv.setImageBitmap(mIcon11);
+                edit_removeimage2_ib.setVisibility(View.VISIBLE);
+                str_image2 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image2_base64.add(str_base64imagestring);
+
+            }
+            else if(str_Is_image3.equalsIgnoreCase("true"))
+            {
+                str_Is_image3="false";
+
+                arraylist_image3_base64.clear();
+                edit_pond_image3_iv.setImageBitmap(mIcon11);
+                edit_removeimage3_ib.setVisibility(View.VISIBLE);
+                str_image3 = "false";
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                mIcon11.compress(Bitmap.CompressFormat.PNG, 60, baos);
+                byte[] b = baos.toByteArray();
+                str_base64imagestring = Base64.encodeToString(b, Base64.DEFAULT);
+                arraylist_image3_base64.add(str_base64imagestring);
+            }*/
+
+        } catch (Exception e) {
+            Log.e("image Error", e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 
 
