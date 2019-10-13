@@ -455,7 +455,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error)
                     {
                         pdLoading.dismiss();
-                        Toast.makeText(EditFarmPondDetails_Activity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditFarmPondDetails_Activity.this,"WS:"+error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
