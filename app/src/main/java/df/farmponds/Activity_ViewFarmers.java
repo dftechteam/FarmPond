@@ -330,7 +330,10 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                viewspinner_tv.setText("Show");
+                spinnerlayout_ll.setVisibility(View.GONE);
+                downarrow_ib.setVisibility(View.GONE);
+                uparrow_ib.setVisibility(View.VISIBLE);
                 String text = search_et.getText().toString().toLowerCase(Locale.getDefault());
                 farmerListViewAdapter.filter(text, originalViewFarmerList);
 
