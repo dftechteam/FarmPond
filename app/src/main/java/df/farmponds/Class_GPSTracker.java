@@ -1,20 +1,19 @@
 package df.farmponds;
 
 
-import android.Manifest;
-import android.annotation.SuppressLint;
+
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,59 +21,59 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class Class_GPSTracker extends Service implements LocationListener {
-
+public class Class_GPSTracker extends Service implements LocationListener  {
+	
 
     private final Context mContext;
-
+ 
     // flag for GPS status
     boolean isGPSEnabled = false;
-
+ 
     // flag for network status
     boolean isNetworkEnabled = false;
-
+ 
     // flag for GPS status
     boolean canGetLocation = false;
-
-    Location location = null; // location
+ 
+    Location location=null; // location
     double latitude; // latitude
     double longitude; // longitude
-
+ 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
+ 
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-
+ 
     // Declaring a Location Manager
     protected LocationManager locationManager;
-
+ 
     public Class_GPSTracker(Context context) {
         this.mContext = context;
         getLocation();
     }
 
-    @SuppressLint("MissingPermission")
+
+
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
-
+ 
             // getting GPS status
             isGPSEnabled = locationManager
                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
+ 
             // getting network status
             isNetworkEnabled = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
+ 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
             } else {
                 this.canGetLocation = true;
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
-
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
@@ -249,4 +248,4 @@ public class Class_GPSTracker extends Service implements LocationListener {
 	
 	
 
-}// End public class Class_GPSTracker
+}// End public class GPSTracker
