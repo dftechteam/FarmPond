@@ -550,7 +550,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                str_selected_farmerID = originalViewFarmerList.get(position).getFarmerid();
+                str_selected_farmerID = ViewFarmerList_arraylist.get(position).getFarmerid();
                 Log.e("str_selected_farmerID", str_selected_farmerID);
                 Intent i = new Intent(Activity_ViewFarmers.this, EachFarmPondDetails_Activity.class);
                /* i.putExtra("sel_yearsp",String.valueOf(sel_yearsp));
