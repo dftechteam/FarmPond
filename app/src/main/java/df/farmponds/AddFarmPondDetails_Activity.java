@@ -66,6 +66,12 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
     String str_farmer_id;
 
+
+    Class_GPSTracker gpstracker_obj;
+    Double double_currentlatitude=0.0;
+    Double double_currentlongitude=0.0;
+    String str_latitude,str_longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -117,13 +123,29 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
         add_newpond_farmername_et.setText(str_farmername);
 
 
+
+
+
         add_ponddetails_submit_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                if(validation())
                {
-                   AsyncTask_Add_farmponddetails();
+                   gpstracker_obj = new Class_GPSTracker(AddFarmPondDetails_Activity.this);
+                   if(gpstracker_obj.canGetLocation())
+                   {
+                       double_currentlatitude = gpstracker_obj.getLatitude();
+                       double_currentlongitude = gpstracker_obj.getLongitude();
+
+                       str_latitude =Double.toString(double_currentlatitude);
+                       str_longitude =Double.toString(double_currentlongitude);
+
+                       AsyncTask_Add_farmponddetails();
+                   }
+                   else{
+                       gpstracker_obj.showSettingsAlert();
+                   }
                }
             }
         });
@@ -305,8 +327,8 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                 params.put("Width",add_newpond_width_et.getText().toString());
                 params.put("Height",add_newpond_height_et.getText().toString());
                 params.put("Depth",add_newpond_depth_et.getText().toString());
-                params.put("Latitude","1");
-                params.put("Longitude","1");
+                params.put("Latitude",str_latitude);
+                params.put("Longitude",str_longitude);
                 params.put("image_link_1",arraylist_image1_base64.get(0).toString());
                 params.put("image_link_2",arraylist_image2_base64.get(0).toString());
                 params.put("image_link_3",arraylist_image3_base64.get(0).toString());
