@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +62,9 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
     ArrayList<String> arraylist_image2_base64 = new ArrayList<>();
     ArrayList<String> arraylist_image3_base64 = new ArrayList<>();
 
-    String str_image1,str_image2,str_image3;
+    String str_image1,str_image2,str_image3,str_cancelclicked;
+
+    String str_farmer_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -87,6 +90,9 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
         add_newfarmpond_iv.setVisibility(View.GONE);
 
         String str_farmername = getIntent().getStringExtra("farmername");
+        str_farmer_id=getIntent().getStringExtra("farmer_id");
+
+
 
         add_newpond_farmername_et=(TextView)findViewById(R.id.add_newpond_farmername_et);
         add_newpond_width_et=(EditText)findViewById(R.id.add_newpond_width_et);
@@ -107,6 +113,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
        add_ponddetails_cancel_bt=(Button)findViewById(R.id.add_ponddetails_cancel_bt);
 
         str_image1=str_image2=str_image3="false";
+        str_cancelclicked="false";
         add_newpond_farmername_et.setText(str_farmername);
 
 
@@ -121,6 +128,14 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             }
         });
 
+
+        add_ponddetails_cancel_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str_cancelclicked="true";
+                onBackPressed();
+            }
+        });
 
 
         add_newpond_image1_iv.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +217,8 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             b_pond_width1=false;
         }
 
-        if (add_newpond_width_et.getText().toString().length() <= 1) {
+
+        if (add_newpond_width_et.getText().toString().length() <= 1||(Integer.parseInt(add_newpond_width_et.getText().toString())<0)) {
             add_newpond_width_et.setError("Enter Valid Width");
             add_newpond_width_et.requestFocus();
             b_pond_width2=false;
@@ -213,7 +229,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             add_newpond_height_et.requestFocus();
             b_pond_height1=false;
         }
-        if (add_newpond_height_et.getText().toString().length() <= 1) {
+        if (add_newpond_height_et.getText().toString().length() <= 1||(Integer.parseInt(add_newpond_height_et.getText().toString())<0)) {
             add_newpond_height_et.setError("Enter Valid Height");
             add_newpond_height_et.requestFocus();
             b_pond_height2=false;
@@ -226,7 +242,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             b_pond_depth1=false;
         }
 
-        if (add_newpond_depth_et.getText().toString().length() <= 1) {
+        if (add_newpond_depth_et.getText().toString().length() <= 1||(Integer.parseInt(add_newpond_depth_et.getText().toString())<0)) {
             add_newpond_depth_et.setError("Enter Valid Depth");
             add_newpond_depth_et.requestFocus();
             b_pond_depth2=false;
@@ -281,11 +297,11 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
 
 
-                String str_image1=arraylist_image1_base64.get(0).toString();
+                /*String str_image1=arraylist_image1_base64.get(0).toString();
                 String str_image2=arraylist_image2_base64.get(0).toString();
-                String str_image3=arraylist_image3_base64.get(0).toString();
+                String str_image3=arraylist_image3_base64.get(0).toString();*/
 
-                params.put("Farmer_ID","1"); // farmerID from previous screen
+                params.put("Farmer_ID",str_farmer_id); // farmerID from previous screen
                 params.put("Width",add_newpond_width_et.getText().toString());
                 params.put("Height",add_newpond_height_et.getText().toString());
                 params.put("Depth",add_newpond_depth_et.getText().toString());
@@ -543,6 +559,30 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             }
         });
         alert.show();
+    }
+
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+
+        if (id == android.R.id.home) {
+            //  Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+           /* Intent i = new Intent(EditFarmPondDetails_Activity.this, EachFarmPondDetails_Activity.class);
+            startActivity(i);
+             finish();*/
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }//end of class

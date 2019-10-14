@@ -83,7 +83,6 @@
                     android:maxLength="4"
                     android:digits="0123456789"
                     android:inputType="number"
-                    android:text=""
                     android:backgroundTint="@android:color/holo_red_light"
                     android:textColor="@color/dark_black_red"
                     android:textSize="17dp" />

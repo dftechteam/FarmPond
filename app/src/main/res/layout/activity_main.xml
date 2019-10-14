@@ -60,7 +60,7 @@
         android:layout_marginTop="20dp"
         android:textStyle="italic"
         android:layout_gravity="center"
-        android:text="TestVer 0.4"/>
+        android:text="TestVer 0.5"/>
 
 
 

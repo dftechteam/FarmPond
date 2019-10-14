@@ -81,10 +81,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLength="4"
+                    android:textSize="17dp"
                     android:digits="0123456789"
-                    android:text=""
-                    android:textColor="@color/dark_black_red"
-                    android:textSize="17dp" />
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textColor="@color/dark_black_red"/>
             </LinearLayout>
 
 
@@ -111,9 +112,11 @@
                     android:layout_height="wrap_content"
                     android:maxLength="4"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textColor="@color/dark_black_red"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textColor="@color/dark_black_red"/>
             </LinearLayout>
 
             <LinearLayout
@@ -138,10 +141,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLength="4"
+                    android:textSize="17dp"
                     android:digits="0123456789"
-                    android:text=""
-                    android:textColor="@color/dark_black_red"
-                    android:textSize="17dp" />
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:textColor="@color/dark_black_red"/>
             </LinearLayout>
 
             <LinearLayout
@@ -336,7 +340,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.54"
                     android:text="Submit"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/color_red"
                     android:textSize="15dp" />
             </LinearLayout>
 

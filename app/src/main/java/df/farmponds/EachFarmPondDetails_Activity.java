@@ -136,6 +136,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             {
                 Intent intent_addfarmpondactivity = new Intent(EachFarmPondDetails_Activity.this,AddFarmPondDetails_Activity.class);
                 intent_addfarmpondactivity.putExtra("farmername", class_farmponddetails_array_obj[0].getFarmer_Name().toString());
+                intent_addfarmpondactivity.putExtra("farmer_id", class_farmponddetails_array_obj[0].getfarmer_id().toString());
                 startActivity(intent_addfarmpondactivity);
                 finish();
 
