@@ -281,6 +281,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         sel_grampanchayatsp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_grampanchayatsp, "").trim());
 
 
+
+
        /* Intent intent = getIntent();
         String str_value_constant=intent.getStringExtra("value_constant");
         if(str_value_constant.equalsIgnoreCase("1")){
@@ -867,7 +869,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_yearDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             yearlist_SP.setAdapter(dataAdapter);
-            yearlist_SP.setSelection(sel_yearsp);
+            if(x>sel_yearsp) {
+                yearlist_SP.setSelection(sel_yearsp);
+            }
         }
 
     }
@@ -906,7 +910,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_stateDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             statelist_SP.setAdapter(dataAdapter);
-            statelist_SP.setSelection(sel_statesp);
+            if(x>sel_statesp) {
+                statelist_SP.setSelection(sel_statesp);
+            }
         }
 
     }
@@ -920,7 +926,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
 
         int x = cursor1.getCount();
-        Log.d("cursor Dcount", Integer.toString(x));
+        Log.d("cursor Scount", Integer.toString(x));
 
         int i = 0;
         arrayObj_Class_stateDetails2 = new Class_StateListDetails[x];
@@ -944,7 +950,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_stateDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             statelist_SP.setAdapter(dataAdapter);
-            statelist_SP.setSelection(sel_statesp);
+            if(x>sel_statesp) {
+                statelist_SP.setSelection(sel_statesp);
+            }
         }
 
     }
@@ -984,7 +992,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_DistrictListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             districtlist_SP.setAdapter(dataAdapter);
-            districtlist_SP.setSelection(sel_districtsp);
+            if(x>sel_districtsp) {
+                districtlist_SP.setSelection(sel_districtsp);
+            }
         }
 
     }
@@ -993,7 +1003,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
         SQLiteDatabase db1 = this.openOrCreateDatabase("FarmerListdb", Context.MODE_PRIVATE, null);
         db1.execSQL("CREATE TABLE IF NOT EXISTS DistrictList(DistrictID VARCHAR,DistrictName VARCHAR,Distr_yearid VARCHAR,Distr_Stateid VARCHAR);");
-        Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM DistrictList WHERE Distr_Stateid='" + str_stateid + "'", null);
+      Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM DistrictList WHERE Distr_Stateid='" + str_stateid + "'", null);
+        //Cursor cursor1 = db1.rawQuery("select * from DistrictList D, TalukList T where D.DistrictID=T.Taluk_districtid AND D.Distr_Stateid='" + str_stateid + "'",null);
+
         int x = cursor1.getCount();
         Log.d("cursor Dcount", Integer.toString(x));
 
@@ -1020,7 +1032,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_DistrictListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             districtlist_SP.setAdapter(dataAdapter);
-            districtlist_SP.setSelection(sel_districtsp);
+            if(x>sel_districtsp) {
+                districtlist_SP.setSelection(sel_districtsp);
+            }
         }
 
     }
@@ -1030,6 +1044,10 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         SQLiteDatabase db1 = this.openOrCreateDatabase("FarmerListdb", Context.MODE_PRIVATE, null);
         db1.execSQL("CREATE TABLE IF NOT EXISTS TalukList(TalukID VARCHAR,TalukName VARCHAR,Taluk_districtid VARCHAR);");
         Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM TalukList", null);
+
+       // Cursor cursor2 = db1.rawQuery("select T.taluka_id,V.village_id,V.village_name from master_state S, master_district D, master_taluka T, master_village V, master_panchayat P where S.state_id=D.state_id AND D.district_id=T.district_id AND T.taluka_id=V.taluk_id AND T.district_id=P.district_id AND (S.state_id in (1,12,25))",null);
+      //  Cursor cursor1 = db1.rawQuery("select T.TalukID,T.TalukName,T.Taluk_districtid from DistrictList D, TalukList T where D.DistrictID=T.Taluk_districtid",null);
+
         int x = cursor1.getCount();
         Log.d("cursor count", Integer.toString(x));
 
@@ -1058,8 +1076,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_TalukListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             taluklist_SP.setAdapter(dataAdapter);
-            taluklist_SP.setSelection(sel_taluksp);
-
+            if(x>sel_taluksp) {
+                taluklist_SP.setSelection(sel_taluksp);
+            }
         }
 
     }
@@ -1071,7 +1090,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         db1.execSQL("CREATE TABLE IF NOT EXISTS TalukList(TalukID VARCHAR,TalukName VARCHAR,Taluk_districtid VARCHAR);");
         Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM TalukList WHERE Taluk_districtid='" + str_distid + "'", null);
         int x = cursor1.getCount();
-        Log.d("cursor Dcount", Integer.toString(x));
+        Log.d("cursor Tcount", Integer.toString(x));
 
         int i = 0;
         arrayObj_Class_TalukListDetails2 = new Class_TalukListDetails[x];
@@ -1096,7 +1115,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_TalukListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             taluklist_SP.setAdapter(dataAdapter);
-            taluklist_SP.setSelection(sel_taluksp);
+            if(x>sel_taluksp) {
+                taluklist_SP.setSelection(sel_taluksp);
+            }
         }
 
     }
@@ -1134,7 +1155,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_VillageListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             villagelist_SP.setAdapter(dataAdapter);
-            villagelist_SP.setSelection(sel_villagesp);
+            if(x>sel_villagesp) {
+                villagelist_SP.setSelection(sel_villagesp);
+            }
         }
 
     }
@@ -1145,7 +1168,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         db1.execSQL("CREATE TABLE IF NOT EXISTS VillageList(VillageID VARCHAR,Village VARCHAR,TalukID VARCHAR);");
         Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM VillageList WHERE TalukID='" + str_talukid + "'", null);
         int x = cursor1.getCount();
-        Log.d("cursor Dcount", Integer.toString(x));
+        Log.d("cursor Vcount", Integer.toString(x));
 
         int i = 0;
         arrayObj_Class_VillageListDetails2 = new Class_VillageListDetails[x];
@@ -1170,7 +1193,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_VillageListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             villagelist_SP.setAdapter(dataAdapter);
-            villagelist_SP.setSelection(sel_villagesp);
+            if(x>sel_villagesp) {
+                villagelist_SP.setSelection(sel_villagesp);
+            }
 
         }
 
@@ -1209,7 +1234,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_GrampanchayatListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             grampanchayatlist_SP.setAdapter(dataAdapter);
-            grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
+            if(x>sel_grampanchayatsp) {
+                grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
+            }
 
         }
 
@@ -1222,7 +1249,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         db1.execSQL("CREATE TABLE IF NOT EXISTS GrampanchayatList(GramanchayatID VARCHAR,Gramanchayat VARCHAR,Panchayat_DistID VARCHAR);");
         Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM GrampanchayatList WHERE Panchayat_DistID='" + str_ditrictid + "'", null);
         int x = cursor1.getCount();
-        Log.d("cursor Dcount", Integer.toString(x));
+        Log.d("cursor Gcount", Integer.toString(x));
 
         int i = 0;
         arrayObj_Class_GrampanchayatListDetails2 = new Class_GrampanchayatListDetails[x];
@@ -1246,7 +1273,9 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             ArrayAdapter dataAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinnercenterstyle, arrayObj_Class_GrampanchayatListDetails2);
             dataAdapter.setDropDownViewResource(R.layout.spinnercenterstyle);
             grampanchayatlist_SP.setAdapter(dataAdapter);
-            grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
+            if(x>sel_grampanchayatsp) {
+                grampanchayatlist_SP.setSelection(sel_grampanchayatsp);
+            }
         }
 
     }
@@ -1341,7 +1370,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
 
         int x = cursor1.getCount();
-        Log.d("cursor Dcount", Integer.toString(x));
+        Log.d("cursor Farmercount", Integer.toString(x));
 
         int i = 0;
         arrayObj_Class_FarmerListDetails2 = new Class_FarmerListDetails[x];
