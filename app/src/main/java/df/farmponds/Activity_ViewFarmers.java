@@ -214,7 +214,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_farmers);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -246,6 +247,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         yearList = new ArrayList<>();
 
         ViewFarmerList_arraylist = new ArrayList<Class_FarmerListDetails>();
+
         farmerListViewAdapter = new FarmerListViewAdapter(Activity_ViewFarmers.this, ViewFarmerList_arraylist);
 
         internetDectector = new Class_InternetDectector(getApplicationContext());
@@ -1061,7 +1063,13 @@ public class Activity_ViewFarmers extends AppCompatActivity {
             do {
                 Class_TalukListDetails innerObj_Class_SandboxList = new Class_TalukListDetails();
                 innerObj_Class_SandboxList.setTaluk_id(cursor1.getString(cursor1.getColumnIndex("TalukID")));
-                innerObj_Class_SandboxList.setTaluk_name(cursor1.getString(cursor1.getColumnIndex("TalukName")));
+                if(cursor1.getString(cursor1.getColumnIndex("TalukName")).isEmpty())
+                {
+                    innerObj_Class_SandboxList.setTaluk_name("Empty In DB");
+                }else{
+                    innerObj_Class_SandboxList.setTaluk_name(cursor1.getString(cursor1.getColumnIndex("TalukName")));
+                }
+                //innerObj_Class_SandboxList.setTaluk_name(cursor1.getString(cursor1.getColumnIndex("TalukName")));
                 innerObj_Class_SandboxList.setDistrict_id(cursor1.getString(cursor1.getColumnIndex("Taluk_districtid")));
 
 
@@ -1514,6 +1522,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                     deleteVillageTable_B4insertion();
                     deleteGrampanchayatTable_B4insertion();
                     deleteViewFarmerlistTable_B4insertion();
+
                     GetDropdownValues();
 //                    GetFarmerDetails();
 
@@ -1854,7 +1863,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 
     }
 
-    private void GetDropdownValues() {
+    private void GetDropdownValues()
+    {
         final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
@@ -2120,7 +2130,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void GetFarmerDetails() {
+    public void GetFarmerDetails()
+    {
         final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
@@ -2169,7 +2180,8 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                             StrArray_farmerimage= new String[farmerArray.length()];
                             arrayObj_Class_FarmerListDetails2 = new Class_FarmerListDetails[farmerArray.length()];
 
-                            for (int i = 0; i < farmerArray.length(); i++) {
+                            for (int i = 0; i < farmerArray.length(); i++)
+                            {
 
                                 //getting the json object of the particular index inside the array
                                 JSONObject farmerObject = farmerArray.getJSONObject(i);
@@ -2280,7 +2292,8 @@ public void Update_ImageLocaly(){
 
     db_viewfarmerlist.close();
 }
-    public void SaveFarmerImage() {
+    public void SaveFarmerImage()
+    {
         final ProgressDialog dialog = new ProgressDialog(Activity_ViewFarmers.this, R.style.AppCompatAlertDialogStyle);
 
 
