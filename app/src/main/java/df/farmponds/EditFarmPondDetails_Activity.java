@@ -89,7 +89,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
     String str_farmerID;
     public static final String sharedpreferenc_farmerid = "sharedpreference_farmer_id";
     public static final String Key_FarmerID = "farmer_id";
-    String str_farmpondimageurl;
+    String str_farmpondimageurl,str_farmpond_id;
 
 
     @Override
@@ -128,6 +128,7 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
         //fetch the details previous activity
 
         String str_farmername =class_farmponddetails_obj.getFarmer_Name().toString() ;
+        str_farmpond_id=class_farmponddetails_obj.getFarmpond_Id().toString();
 
 
         edit_ponddetails_farmername_et=(TextView)findViewById(R.id.edit_ponddetails_farmername_et);
@@ -476,15 +477,15 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
 
                if(arraylist_image1_ID_base64.size()>0)
                { str_imageID_1=arraylist_image1_ID_base64.get(0).toString();}
-               else{ str_imageID_1="";}
+               else{ str_imageID_1=" ";}
 
                 if(arraylist_image2_ID_base64.size()>0)
                 { str_imageID_2=arraylist_image2_ID_base64.get(0).toString();}
-                else{ str_imageID_2="";}
+                else{ str_imageID_2=" ";}
 
                 if(arraylist_image3_ID_base64.size()>0)
                 { str_imageID_3=arraylist_image3_ID_base64.get(0).toString();}
-                else{ str_imageID_3="";}
+                else{ str_imageID_3=" ";}
 
                 Log.e("imageid1",str_imageID_1);
                 Log.e("imageid2",str_imageID_2);
@@ -498,8 +499,9 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
                 params.put("Width",edit_pondwidth_et.getText().toString());
                 params.put("Height",edit_pondheight_et.getText().toString());
                 params.put("Depth",edit_ponddepth_et.getText().toString());
-                params.put("Latitude","");
-                params.put("Longitude","");
+                params.put("Latitude","1");
+                params.put("Longitude","1");
+                   params.put("Farmpond_ID",str_farmpond_id);
 
                    params.put("image_id1",str_imageID_1);
                    params.put("image_id2",str_imageID_2);
