@@ -2357,7 +2357,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
 
             if (jsonObject.getString("statusMessage").equalsIgnoreCase("success")) {
 
-                Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Image updated successfully to verify click on refesh button", Toast.LENGTH_LONG).show();
             }
             if (jsonObject.getString("statusMessage").equalsIgnoreCase("Farmer_ID Empty")) {
 
@@ -2646,7 +2646,7 @@ Log.e("img_farmerid",str_selected_farmerID_forimagesaving);
         BitMapToString(thumbnail);
         if(isInternetPresent){
             SaveFarmerImage();
-         //   Update_ImageLocaly();
+            ///Update_ImageLocaly();
         }else{
 
 
