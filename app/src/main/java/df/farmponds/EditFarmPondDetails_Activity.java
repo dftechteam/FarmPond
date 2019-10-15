@@ -477,15 +477,15 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
 
                if(arraylist_image1_ID_base64.size()>0)
                { str_imageID_1=arraylist_image1_ID_base64.get(0).toString();}
-               else{ str_imageID_1=" ";}
+               else{ str_imageID_1="";}
 
                 if(arraylist_image2_ID_base64.size()>0)
                 { str_imageID_2=arraylist_image2_ID_base64.get(0).toString();}
-                else{ str_imageID_2=" ";}
+                else{ str_imageID_2="";}
 
                 if(arraylist_image3_ID_base64.size()>0)
                 { str_imageID_3=arraylist_image3_ID_base64.get(0).toString();}
-                else{ str_imageID_3=" ";}
+                else{ str_imageID_3="";}
 
                 Log.e("imageid1",str_imageID_1);
                 Log.e("imageid2",str_imageID_2);

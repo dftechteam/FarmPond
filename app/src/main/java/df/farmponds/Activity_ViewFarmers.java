@@ -527,12 +527,12 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 selected_grampanchayat = Obj_Class_GramanchayatDetails.getGramanchayat_name().toString();
                 sel_grampanchayatsp = grampanchayatlist_SP.getSelectedItemPosition();
 
-                Log.e("sp_stryear_ID..", sp_stryear_ID);
+               /* Log.e("sp_stryear_ID..", sp_stryear_ID);
                 Log.e("sp_strstate_ID..", sp_strstate_ID);
                 Log.e("sp_strdistrict_ID..", sp_strdistrict_ID);
                 Log.e("sp_strTaluk_ID..", sp_strTaluk_ID);
                 Log.e("sp_strVillage_ID..", sp_strVillage_ID);
-                Log.e("sp_strpachayat_ID..", sp_strgrampanchayat_ID);
+                Log.e("sp_strpachayat_ID..", sp_strgrampanchayat_ID);*/
 //                Log.e("selected_grampanchayat", selected_grampanchayat);
 
                 //Update_ViewFarmerListID_spinner(sp_stryear_ID, sp_strstate_ID, sp_strdistrict_ID, sp_strTaluk_ID,sp_strVillage_ID);
