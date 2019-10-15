@@ -188,12 +188,12 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
                 Intent i = new Intent(Activity_MarketingHomeScreen.this, Activity_ViewFarmers.class);
                 /*i.putExtra("value_constant","0");*/
                 SharedPreferences.Editor myprefs_spinner = sharedpref_spinner_Obj.edit();
-                myprefs_spinner.putString(Key_sel_yearsp, String.valueOf(0));
-                myprefs_spinner.putString(Key_sel_statesp, String.valueOf(0));
-                myprefs_spinner.putString(Key_sel_districtsp, String.valueOf(0));
-                myprefs_spinner.putString(Key_sel_taluksp, String.valueOf(0));
-                myprefs_spinner.putString(Key_sel_villagesp, String.valueOf(0));
-                myprefs_spinner.putString(Key_sel_grampanchayatsp, String.valueOf(0));
+                myprefs_spinner.putString(Key_sel_yearsp, "0");
+                myprefs_spinner.putString(Key_sel_statesp, "0");
+                myprefs_spinner.putString(Key_sel_districtsp, "0");
+                myprefs_spinner.putString(Key_sel_taluksp, "0");
+                myprefs_spinner.putString(Key_sel_villagesp, "0");
+                myprefs_spinner.putString(Key_sel_grampanchayatsp, "0");
 
                 myprefs_spinner.apply();
                 startActivity(i);

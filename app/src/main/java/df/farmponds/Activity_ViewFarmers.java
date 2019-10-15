@@ -282,6 +282,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
         sel_villagesp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_villagesp, "").trim());
         sel_grampanchayatsp = Integer.parseInt(sharedpref_spinner_Obj.getString(Key_sel_grampanchayatsp, "").trim());
 
+        Log.e("tag","sel_districtsp="+sel_districtsp+"sel_statesp="+sel_statesp);
 
 
 

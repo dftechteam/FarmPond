@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -18,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -74,6 +78,9 @@ public class MainActivity extends AppCompatActivity
     GoogleSignInClient googlesigninclient_obj;
     FirebaseAuth firebaseauth_obj;
     SignInButton google_signin_bt;
+
+    public final static String COLOR = "#1565C0";
+
 
     GoogleSignInAccount account;
 
@@ -150,6 +157,7 @@ public class MainActivity extends AppCompatActivity
         username_et =(EditText) findViewById(R.id.username_et);
         google_signin_bt =(SignInButton)findViewById(R.id.google_signin_bt);
         google_signin_bt.setColorScheme(SignInButton.COLOR_DARK);
+        setGooglePlusButtonText(google_signin_bt,"  Sign in with DF mail  ");
 
         context_obj=this.getApplicationContext();
 
@@ -462,6 +470,24 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         return true;
+    }
+
+    protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
+        // Find the TextView that is inside of the SignInButton and set its text
+        for (int i = 0; i < signInButton.getChildCount(); i++) {
+            View v = signInButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText(buttonText);
+                // tv.setBackgroundColor(Color.CYAN);
+                tv.setBackgroundDrawable(
+                        new ColorDrawable(Color.parseColor(COLOR)));
+                tv.setTextColor(Color.WHITE);
+                tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/laouibold.ttf"));
+                return;
+            }
+        }
     }
 
 }// end of class
