@@ -67,10 +67,13 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
     String str_farmer_id;
 
 
-    Class_GPSTracker gpstracker_obj;
+    Class_GPSTracker gpstracker_obj1,gpstracker_obj2;
     Double double_currentlatitude=0.0;
     Double double_currentlongitude=0.0;
     String str_latitude,str_longitude;
+
+
+    TextView latitude_tv,longitude_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -118,11 +121,36 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
         add_ponddetails_submit_bt=(Button)findViewById(R.id.add_ponddetails_submit_bt);
        add_ponddetails_cancel_bt=(Button)findViewById(R.id.add_ponddetails_cancel_bt);
 
+        longitude_tv=(TextView)findViewById(R.id.longitude_tv);
+        latitude_tv=(TextView)findViewById(R.id.latitude_tv);
+
+
         str_image1=str_image2=str_image3="false";
         str_cancelclicked="false";
         add_newpond_farmername_et.setText(str_farmername);
 
+        gpstracker_obj2 = new Class_GPSTracker(AddFarmPondDetails_Activity.this);
+        if(gpstracker_obj2.canGetLocation())
+        {
+            double_currentlatitude = gpstracker_obj2.getLatitude();
+            double_currentlongitude = gpstracker_obj2.getLongitude();
 
+
+            str_latitude =Double.toString(double_currentlatitude);
+            str_longitude =Double.toString(double_currentlongitude);
+
+
+            latitude_tv.setText(str_latitude);
+            longitude_tv.setText(str_longitude);
+
+            Log.e("lat",str_latitude);
+            Log.e("long",str_longitude);
+
+
+        }else
+        {
+            gpstracker_obj2.showSettingsAlert();
+        }
 
 
 
@@ -132,19 +160,24 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             {
                if(validation())
                {
-                   gpstracker_obj = new Class_GPSTracker(AddFarmPondDetails_Activity.this);
-                   if(gpstracker_obj.canGetLocation())
+                   gpstracker_obj1 = new Class_GPSTracker(AddFarmPondDetails_Activity.this);
+                   if(gpstracker_obj1.canGetLocation())
                    {
-                       double_currentlatitude = gpstracker_obj.getLatitude();
-                       double_currentlongitude = gpstracker_obj.getLongitude();
+                       double_currentlatitude = gpstracker_obj1.getLatitude();
+                       double_currentlongitude = gpstracker_obj1.getLongitude();
 
                        str_latitude =Double.toString(double_currentlatitude);
                        str_longitude =Double.toString(double_currentlongitude);
 
+
+                       latitude_tv.setText(str_latitude);
+                       longitude_tv.setText(str_longitude);
+
+
                        AsyncTask_Add_farmponddetails();
                    }
                    else{
-                       gpstracker_obj.showSettingsAlert();
+                       gpstracker_obj1.showSettingsAlert();
                    }
                }
             }

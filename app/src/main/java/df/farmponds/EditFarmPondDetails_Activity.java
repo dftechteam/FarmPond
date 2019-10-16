@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -466,6 +467,18 @@ public class EditFarmPondDetails_Activity extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams()
             {
+
+
+
+
+
+                Drawable d = null; // the drawable (Captain Obvious, to the rescue!!!)
+                Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] bitmapdata = stream.toByteArray();
+
+
 
 
 

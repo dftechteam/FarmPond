@@ -314,6 +314,63 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="Latitude"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/latitude_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text="longitude"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/longitude_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.54"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+
 
 
             <LinearLayout
