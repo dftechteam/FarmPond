@@ -13,6 +13,7 @@ public class Class_FarmerListDetails {
     String farmercode;
     String farmername;
     String farmerimage;
+    byte[] localfarmerimage;
 
     public Class_FarmerListDetails(){}
 
@@ -26,7 +27,7 @@ public class Class_FarmerListDetails {
         return farmerid;
     }
 
-    public Class_FarmerListDetails(String yearid, String stateid, String districtid, String talukid, String villageid, String grampanchayatid, String farmerid, String farmercode, String farmername, String farmerimage)  {
+    public Class_FarmerListDetails(String yearid, String stateid, String districtid, String talukid, String villageid, String grampanchayatid, String farmerid, String farmercode, String farmername, String farmerimage, byte[] localimage)  {
         this.yearid = yearid;
         this.stateid = stateid;
         this.districtid = districtid;
@@ -37,7 +38,16 @@ public class Class_FarmerListDetails {
         this.farmercode = farmercode;
         this.farmername = farmername;
         this.farmerimage = farmerimage;
+        this.localfarmerimage = localimage;
 
+    }
+
+    public byte[] getLocalfarmerimage() {
+        return localfarmerimage;
+    }
+
+    public void setLocalfarmerimage(byte[] localfarmerimage) {
+        this.localfarmerimage = localfarmerimage;
     }
 
     public void setFarmerid(String farmerid) {

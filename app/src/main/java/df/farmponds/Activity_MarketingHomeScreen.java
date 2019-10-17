@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.nio.charset.StandardCharsets;
 
 
 public class Activity_MarketingHomeScreen extends AppCompatActivity {
@@ -33,7 +36,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
 
     Class_GPSTracker gps_object;
 
-    ImageView applicationdetails_ib,college_addmission_history_IB;
+    ImageView viewfarmer_ib,college_addmission_history_IB;
 
     Class_InternetDectector internetDectector;
     Boolean isInternetPresent = false;
@@ -59,6 +62,9 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
     public static final String Key_sel_grampanchayatsp = "sel_grampanchayatsp";
     SharedPreferences sharedpref_spinner_Obj;
 
+    String localimg_FarmerID;
+    byte[] localimg_byte;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -73,10 +79,14 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
         title.setText("Farmer View");
         getSupportActionBar().setTitle("");
 
+
+        internetDectector = new Class_InternetDectector(getApplicationContext());
+        isInternetPresent = internetDectector.isConnectingToInternet();
+
         sharedpref_validMailID_Obj=getSharedPreferences(sharedpreferenc_mailbook, Context.MODE_PRIVATE);
         sharedpref_spinner_Obj = getSharedPreferences(sharedpreferenc_selectedspinner, Context.MODE_PRIVATE);
 
-        applicationdetails_ib=(ImageView)findViewById(R.id.applicationdetails_IB);
+        viewfarmer_ib=(ImageView)findViewById(R.id.viewFarmer_IB);
 
         Notuploadedcount_tv=(TextView)findViewById(R.id.Notuploadedcount_TV);
         notupload_ib=(ImageButton)findViewById(R.id.notupload_IB);
@@ -173,11 +183,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
 */
 
 
-
-
-
-
-        applicationdetails_ib.setOnClickListener(new View.OnClickListener() {
+        viewfarmer_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -197,7 +203,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
 
                 myprefs_spinner.apply();
                 startActivity(i);
-              //  finish();
+                //  finish();
 
                 if (isInternetPresent)
                 {
@@ -223,8 +229,16 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
             }
         });
 
+        notupload_ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isInternetPresent) {
 
+                    farmer_localImage();
 
+                }
+            }
+        });
     /*    feessubmit_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -252,8 +266,7 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
             }
         });*/
 
-        internetDectector = new Class_InternetDectector(getApplicationContext());
-        isInternetPresent = internetDectector.isConnectingToInternet();
+
 
     /*    if (isInternetPresent) {
             getOfflineRecord();
@@ -267,7 +280,37 @@ public class Activity_MarketingHomeScreen extends AppCompatActivity {
 
 
 
+    public void farmer_localImage(){
+        SQLiteDatabase db1 = this.openOrCreateDatabase("FarmerListdb", Context.MODE_PRIVATE, null);
+        db1.execSQL("CREATE TABLE IF NOT EXISTS ViewFarmerList(DispFarmerTable_YearID VARCHAR,DispFarmerTable_StateID VARCHAR,DispFarmerTable_DistrictID VARCHAR,DispFarmerTable_TalukID VARCHAR,DispFarmerTable_VillageID VARCHAR,DispFarmerTable_GrampanchayatID VARCHAR,DispFarmerTable_FarmerID VARCHAR,DispFarmerTable_Farmer_Code VARCHAR,DispFarmerTable_FarmerName VARCHAR,DispFarmerTable_FarmerImage VARCHAR,LocalFarmerImg BLOB);");
+        Cursor cursor1 = db1.rawQuery("SELECT DispFarmerTable_FarmerID,LocalFarmerImg FROM ViewFarmerList WHERE LocalFarmerImg IS NOT NULL", null);
+        // Cursor cursor1 = db1.rawQuery("SELECT DISTINCT * FROM StateList WHERE state_yearid='" + str_yearids + "'", null);
 
+
+        int x = cursor1.getCount();
+        Log.d("tag","cursor Farmercount home=="+ x);
+
+        if(x > 0){
+            if (cursor1.moveToFirst()) {
+
+                do {
+                    Log.d("cursor Farmercount", Integer.toString(x));
+                    localimg_byte = cursor1.getBlob(cursor1.getColumnIndex("LocalFarmerImg"));
+                    localimg_FarmerID = cursor1.getString(cursor1.getColumnIndex("DispFarmerTable_FarmerID"));
+                    i++;
+
+                } while (cursor1.moveToNext());
+            }
+            db1.close();
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                String base64Encoded = new String(localimg_byte, StandardCharsets.UTF_8);
+                Log.e("tag","base64Encoded="+base64Encoded);
+                Activity_ViewFarmers.SaveFarmerImage(localimg_FarmerID,base64Encoded,this);
+            }
+
+        }
+    }
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
