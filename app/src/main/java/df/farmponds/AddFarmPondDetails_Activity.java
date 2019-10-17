@@ -78,6 +78,9 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
     Class_InternetDectector internetDectector;
     Boolean isInternetPresent = false;
 
+
+    static Class_alert_msg obj_class_alert_msg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -131,6 +134,8 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
         str_image1=str_image2=str_image3="false";
         str_cancelclicked="false";
         add_newpond_farmername_et.setText(str_farmername);
+
+        obj_class_alert_msg = new Class_alert_msg(getApplicationContext());
 
         gpstracker_obj2 = new Class_GPSTracker(AddFarmPondDetails_Activity.this);
         if(gpstracker_obj2.canGetLocation())
@@ -191,7 +196,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
                        }
                        {
-
+                           obj_class_alert_msg.alerts_dialog("error","error",getApplicationContext());
                        }
                    }
                    else{
