@@ -75,6 +75,9 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
     TextView latitude_tv,longitude_tv;
 
+    Class_InternetDectector internetDectector;
+    Boolean isInternetPresent = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -146,6 +149,11 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             Log.e("lat",str_latitude);
             Log.e("long",str_longitude);
 
+            if(str_latitude.equals("0.0")||str_longitude.equals("0.0"))
+            {
+                alertdialog_refresh_latandlong();
+            }
+
 
         }else
         {
@@ -174,7 +182,17 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
                        longitude_tv.setText(str_longitude);
 
 
-                       AsyncTask_Add_farmponddetails();
+                       internetDectector = new Class_InternetDectector(getApplicationContext());
+                       isInternetPresent = internetDectector.isConnectingToInternet();
+
+                       if (isInternetPresent) {
+
+                           AsyncTask_Add_farmponddetails();
+
+                       }
+                       {
+
+                       }
                    }
                    else{
                        gpstracker_obj1.showSettingsAlert();
@@ -615,6 +633,49 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
         });
         alert.show();
     }
+
+
+
+
+
+    public void alertdialog_refresh_latandlong() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AddFarmPondDetails_Activity.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.app_name);
+        dialog.setMessage("Click Ok to fetch latitude and Longitude");
+
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+
+                Intent i = new Intent(AddFarmPondDetails_Activity.this, EachFarmPondDetails_Activity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+              //  alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
