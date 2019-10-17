@@ -72,6 +72,13 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
     public static final String Key_sel_grampanchayatsp = "sel_grampanchayatsp";
     SharedPreferences sharedpref_spinner_Obj;
 
+
+
+    Class_GPSTracker gpstracker_obj;
+    Double double_currentlatitude=0.0;
+    Double double_currentlongitude=0.0;
+    String str_latitude,str_longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -134,11 +141,34 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent_addfarmpondactivity = new Intent(EachFarmPondDetails_Activity.this,AddFarmPondDetails_Activity.class);
-                intent_addfarmpondactivity.putExtra("farmername", class_farmponddetails_array_obj[0].getFarmer_Name().toString());
-                intent_addfarmpondactivity.putExtra("farmer_id", class_farmponddetails_array_obj[0].getfarmer_id().toString());
-                startActivity(intent_addfarmpondactivity);
-                finish();
+
+                gpstracker_obj = new Class_GPSTracker(EachFarmPondDetails_Activity.this);
+
+
+                if(gpstracker_obj.canGetLocation())
+                {
+                    double_currentlatitude = gpstracker_obj.getLatitude();
+                    double_currentlongitude = gpstracker_obj.getLongitude();
+
+
+                    str_latitude =Double.toString(double_currentlatitude);
+                    str_longitude =Double.toString(double_currentlongitude);
+
+
+                    Log.e("lat",str_latitude);
+                    Log.e("long",str_longitude);
+
+                    Intent intent_addfarmpondactivity = new Intent(EachFarmPondDetails_Activity.this,AddFarmPondDetails_Activity.class);
+                    intent_addfarmpondactivity.putExtra("farmername", class_farmponddetails_array_obj[0].getFarmer_Name().toString());
+                    intent_addfarmpondactivity.putExtra("farmer_id", class_farmponddetails_array_obj[0].getfarmer_id().toString());
+                    startActivity(intent_addfarmpondactivity);
+                    finish();
+
+
+                }else
+                {
+                    gpstracker_obj.showSettingsAlert();
+                }
 
             }
         });
@@ -543,6 +573,7 @@ public class EachFarmPondDetails_Activity extends AppCompatActivity {
             startActivity(i);
             finish();
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);
