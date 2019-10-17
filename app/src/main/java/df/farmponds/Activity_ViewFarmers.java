@@ -409,6 +409,17 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 sp_stryear_ID = Obj_Class_yearDetails.getYearID().toString();
                 selected_year = yearlist_SP.getSelectedItem().toString();
                 sel_yearsp = yearlist_SP.getSelectedItemPosition();
+
+                originalViewFarmerList.clear();
+                ViewFarmerList_arraylist.clear();
+                farmerListViewAdapter.notifyDataSetChanged();
+                farmer_listview.setAdapter(farmerListViewAdapter);
+
+                statelist_SP.setSelection(0);
+                districtlist_SP.setSelection(0);
+                taluklist_SP.setSelection(0);
+                villagelist_SP.setSelection(0);
+                grampanchayatlist_SP.setSelection(0);
                 // Update_stateid_spinner(sp_stryear_ID);
                 //  Log.e("sp_stryear_ID", " : " + sp_stryear_ID);
 
@@ -433,6 +444,15 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 sel_statesp = statelist_SP.getSelectedItemPosition();
 
                 Update_districtid_spinner(sp_strstate_ID);
+                originalViewFarmerList.clear();
+                ViewFarmerList_arraylist.clear();
+                farmerListViewAdapter.notifyDataSetChanged();
+                farmer_listview.setAdapter(farmerListViewAdapter);
+
+                districtlist_SP.setSelection(0);
+                taluklist_SP.setSelection(0);
+                villagelist_SP.setSelection(0);
+                grampanchayatlist_SP.setSelection(0);
                 //  Log.e("selected_stateName", " : " + selected_stateName);
                 // Log.e("sp_strstate_ID", " : " + sp_strstate_ID);
                 // Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,"","","","");
@@ -461,6 +481,15 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Update_TalukId_spinner(sp_strdistrict_ID);
                 // Update_TalukId_spinner("5623");
                 Update_GramPanchayatID_spinner(sp_strdistrict_ID);
+
+                originalViewFarmerList.clear();
+                ViewFarmerList_arraylist.clear();
+                farmerListViewAdapter.notifyDataSetChanged();
+                farmer_listview.setAdapter(farmerListViewAdapter);
+
+                taluklist_SP.setSelection(0);
+                villagelist_SP.setSelection(0);
+                grampanchayatlist_SP.setSelection(0);
                 // Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,sp_strdistrict_ID,"","","");
 
             }
@@ -488,6 +517,13 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 //                Log.e("sp_strdistrict_ID..", sp_strdistrict_ID);
                 //Log.e("sp_strTaluk_ID..", sp_strTaluk_ID);
                 Update_VillageId_spinner(sp_strTaluk_ID);
+                originalViewFarmerList.clear();
+                ViewFarmerList_arraylist.clear();
+                farmerListViewAdapter.notifyDataSetChanged();
+                farmer_listview.setAdapter(farmerListViewAdapter);
+
+                villagelist_SP.setSelection(0);
+                grampanchayatlist_SP.setSelection(0);
                 // Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,sp_strdistrict_ID,sp_strTaluk_ID,"","");
 
             }
@@ -513,7 +549,12 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 //  Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,sp_strdistrict_ID,sp_strTaluk_ID,sp_strVillage_ID,"");
 
                 // Update_ids_farmerlist_listview("3","1","539","5700","626790","60");
+                originalViewFarmerList.clear();
+                ViewFarmerList_arraylist.clear();
+                farmerListViewAdapter.notifyDataSetChanged();
+                farmer_listview.setAdapter(farmerListViewAdapter);
 
+                grampanchayatlist_SP.setSelection(0);
             }
 
             @Override
