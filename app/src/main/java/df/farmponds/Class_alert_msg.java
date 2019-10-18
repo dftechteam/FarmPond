@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.content.Intent;
+
+//import static android.support.v4.content.ContextCompat.startActivity;
 
 public class Class_alert_msg
 {
@@ -24,15 +27,15 @@ public class Class_alert_msg
 
 
 
-    public  static void alerts_dialog(String str_error, String ws, Context context)
+    public  static void alerts_dialog(String str_displayinalertbox, String ws, final Context context)
     {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setCancelable(false);
         dialog.setTitle("DF FarmPond");
-        dialog.setMessage("No Internet! Data is stored in Mobile");
+        dialog.setMessage(str_displayinalertbox);
 
-        Activity activity = (Activity) context;
+      //  Activity activity = (Activity) context;
        // fragmentManager = activity.getFragmentManager();
 
 
@@ -42,7 +45,12 @@ public class Class_alert_msg
             {
 
 
+                Intent intent = new Intent(context,EachFarmPondDetails_Activity.class);
+                context.startActivity(intent);
+              //  (context.startActivity)finish();
 
+
+                
                 dialog.dismiss();
 
             }
@@ -58,8 +66,8 @@ public class Class_alert_msg
                 alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
             }
         });
-        alert.show();
 
+        alert.show();
 
     }
 
