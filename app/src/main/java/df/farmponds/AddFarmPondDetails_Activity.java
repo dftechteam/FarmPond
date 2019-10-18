@@ -3,9 +3,12 @@ package df.farmponds;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -165,7 +168,7 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
             gpstracker_obj2.showSettingsAlert();
         }
 
-
+        checkthecount();
 
         add_ponddetails_submit_bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +199,14 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
                        }
                        {
-                           obj_class_alert_msg.alerts_dialog("error","error",getApplicationContext());
+
+                           insert_into_farmpondsDB();
+                           Toast.makeText(getApplicationContext(),"No Internet Data Stored in your Mobile",Toast.LENGTH_SHORT).show();
+
+
+                           Intent intent = new Intent(AddFarmPondDetails_Activity.this,EachFarmPondDetails_Activity.class);
+                           startActivity(intent);
+                           finish();
                        }
                    }
                    else{
@@ -677,12 +687,49 @@ public class AddFarmPondDetails_Activity extends AppCompatActivity {
 
 
 
+    public void insert_into_farmpondsDB()
+    {
+
+        String str_width_4rdb=add_newpond_width_et.getText().toString();
+        String str_height_4rdb=add_newpond_height_et.getText().toString();
+        String str_depth_4rdb=add_newpond_depth_et.getText().toString();
+        DBCreate_Farmpondsedetails_toserver_2SQLiteDB(str_width_4rdb,str_height_4rdb,str_depth_4rdb);
+    }
+
+
+    public void DBCreate_Farmpondsedetails_toserver_2SQLiteDB(String str_width_4rdb,String str_height_4rdb,String str_depth_4rdb)
+    {
+        SQLiteDatabase db1 = this.openOrCreateDatabase("NewFarmPondDetails_DB", Context.MODE_PRIVATE, null);
+        db1.execSQL("CREATE TABLE IF NOT EXISTS NewFarmPondDetails_toServer(FID VARCHAR,WidthDB VARCHAR," +
+                "HeightDB VARCHAR,DepthDB VARCHAR,LatDB VARCHAR,LongDB VARCHAR);");
+
+        String SQLiteQuery = "INSERT INTO NewFarmPondDetails_toServer (FID,WidthDB,HeightDB,DepthDB,LatDB,LongDB)" +
+                " VALUES ('"+str_farmer_id+"','"+str_width_4rdb+"','"+str_height_4rdb+"','"+str_depth_4rdb+"'," +
+                "'"+str_latitude+"','"+str_longitude+"');";
+        db1.execSQL(SQLiteQuery);
+        db1.close();
+    }
 
 
 
 
 
 
+
+    public void checkthecount()
+    {
+
+        SQLiteDatabase db6 = openOrCreateDatabase("NewFarmPondDetails_DB", Context.MODE_PRIVATE, null);
+        db6.execSQL("CREATE TABLE IF NOT EXISTS NewFarmPondDetails_toServer(FID VARCHAR,WidthDB VARCHAR," +
+                "HeightDB VARCHAR,DepthDB VARCHAR,LatDB VARCHAR,LongDB VARCHAR);");
+
+        Cursor cursor1 = db6.rawQuery("SELECT * FROM NewFarmPondDetails_toServer", null);
+        int x = cursor1.getCount();
+
+        Log.e("dbcount", String.valueOf(x));
+
+        db6.close();
+    }
 
 
 
