@@ -408,12 +408,23 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_yearDetails = (Class_YearListDetails) yearlist_SP.getSelectedItem();
                 sp_stryear_ID = Obj_Class_yearDetails.getYearID().toString();
                 selected_year = yearlist_SP.getSelectedItem().toString();
-                sel_yearsp = yearlist_SP.getSelectedItemPosition();
+                int sel_yearsp_new = yearlist_SP.getSelectedItemPosition();
+              //  farmerListViewAdapter.notifyDataSetChanged();
 
-                originalViewFarmerList.clear();
+                if(sel_yearsp_new!=sel_yearsp) {
+                    sel_yearsp=sel_yearsp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+                    statelist_SP.setSelection(0);
+                    districtlist_SP.setSelection(0);
+                    taluklist_SP.setSelection(0);
+                    villagelist_SP.setSelection(0);
+                    grampanchayatlist_SP.setSelection(0);
+                }
+              /*  originalViewFarmerList.clear();
                 ViewFarmerList_arraylist.clear();
                 farmerListViewAdapter.notifyDataSetChanged();
-                farmer_listview.setAdapter(farmerListViewAdapter);
+                farmer_listview.setAdapter(farmerListViewAdapter);*/
 
                /* statelist_SP.setSelection(0);
                 districtlist_SP.setSelection(0);
@@ -441,14 +452,23 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_stateDetails = (Class_StateListDetails) statelist_SP.getSelectedItem();
                 sp_strstate_ID = Obj_Class_stateDetails.getState_id().toString();
                 selected_stateName = statelist_SP.getSelectedItem().toString();
-                sel_statesp = statelist_SP.getSelectedItemPosition();
+                int sel_statesp_new = statelist_SP.getSelectedItemPosition();
 
                 Update_districtid_spinner(sp_strstate_ID);
-                originalViewFarmerList.clear();
+                if(sel_statesp_new!=sel_statesp) {
+                    sel_statesp=sel_statesp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+                    districtlist_SP.setSelection(0);
+                    taluklist_SP.setSelection(0);
+                    villagelist_SP.setSelection(0);
+                    grampanchayatlist_SP.setSelection(0);
+                }
+     /*           originalViewFarmerList.clear();
                 ViewFarmerList_arraylist.clear();
                 farmerListViewAdapter.notifyDataSetChanged();
                 farmer_listview.setAdapter(farmerListViewAdapter);
-
+*/
               /*  districtlist_SP.setSelection(0);
                 taluklist_SP.setSelection(0);
                 villagelist_SP.setSelection(0);
@@ -472,7 +492,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 sp_strdistrict_ID = Obj_Class_DistrictDetails.getDistrict_id();
                 sp_strdistrict_state_ID = Obj_Class_DistrictDetails.getState_id();
                 selected_district = districtlist_SP.getSelectedItem().toString();
-                sel_districtsp = districtlist_SP.getSelectedItemPosition();
+                int sel_districtsp_new = districtlist_SP.getSelectedItemPosition();
 //                Log.i("selected_district", " : " + selected_district);
 //                Log.i("sp_strdistrict_state_ID", " : " + sp_strdistrict_state_ID);
                 //Log.e("sp_strdistrict_ID", " : " + sp_strdistrict_ID);
@@ -482,11 +502,19 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 // Update_TalukId_spinner("5623");
                 Update_GramPanchayatID_spinner(sp_strdistrict_ID);
 
-                originalViewFarmerList.clear();
+                if(sel_districtsp_new!=sel_districtsp) {
+                    sel_districtsp=sel_districtsp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+                    taluklist_SP.setSelection(0);
+                    villagelist_SP.setSelection(0);
+                    grampanchayatlist_SP.setSelection(0);
+                }
+           /*     originalViewFarmerList.clear();
                 ViewFarmerList_arraylist.clear();
                 farmerListViewAdapter.notifyDataSetChanged();
                 farmer_listview.setAdapter(farmerListViewAdapter);
-
+*/
                 /*taluklist_SP.setSelection(0);
                 villagelist_SP.setSelection(0);
                 grampanchayatlist_SP.setSelection(0);*/
@@ -508,7 +536,7 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_TalukDetails = (Class_TalukListDetails) taluklist_SP.getSelectedItem();
                 sp_strTaluk_ID = Obj_Class_TalukDetails.getTaluk_id();
                 selected_taluk = taluklist_SP.getSelectedItem().toString();
-                sel_taluksp = taluklist_SP.getSelectedItemPosition();
+                int sel_taluksp_new = taluklist_SP.getSelectedItemPosition();
                 // Update_VillageId_spinner("5433");//5516,sp_strTaluk_ID
 //                Log.i("selected_taluk", " : " + selected_taluk);
 //
@@ -517,10 +545,19 @@ public class Activity_ViewFarmers extends AppCompatActivity {
 //                Log.e("sp_strdistrict_ID..", sp_strdistrict_ID);
                 //Log.e("sp_strTaluk_ID..", sp_strTaluk_ID);
                 Update_VillageId_spinner(sp_strTaluk_ID);
-                originalViewFarmerList.clear();
+
+                if(sel_taluksp_new!=sel_taluksp) {
+                    sel_taluksp=sel_taluksp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+
+                    villagelist_SP.setSelection(0);
+                    grampanchayatlist_SP.setSelection(0);
+                }
+              /*  originalViewFarmerList.clear();
                 ViewFarmerList_arraylist.clear();
                 farmerListViewAdapter.notifyDataSetChanged();
-                farmer_listview.setAdapter(farmerListViewAdapter);
+                farmer_listview.setAdapter(farmerListViewAdapter);*/
 /*
                 villagelist_SP.setSelection(0);
                 grampanchayatlist_SP.setSelection(0);*/
@@ -543,16 +580,24 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 sp_strVillage_ID = Obj_Class_VillageListDetails.getVillage_id();
                 selected_village = villagelist_SP.getSelectedItem().toString();
 
-                sel_villagesp = villagelist_SP.getSelectedItemPosition();
+                int sel_villagesp_new = villagelist_SP.getSelectedItemPosition();
+
+                if(sel_villagesp_new!=sel_villagesp) {
+                    sel_villagesp=sel_villagesp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+
+                    grampanchayatlist_SP.setSelection(0);
+                }
                 // Log.i("selected_village", " : " + selected_village);
 
                 //  Update_ids_farmerlist_listview(sp_stryear_ID,sp_strstate_ID,sp_strdistrict_ID,sp_strTaluk_ID,sp_strVillage_ID,"");
 
                 // Update_ids_farmerlist_listview("3","1","539","5700","626790","60");
-                originalViewFarmerList.clear();
+              /*  originalViewFarmerList.clear();
                 ViewFarmerList_arraylist.clear();
                 farmerListViewAdapter.notifyDataSetChanged();
-                farmer_listview.setAdapter(farmerListViewAdapter);
+                farmer_listview.setAdapter(farmerListViewAdapter);*/
 
                 /*grampanchayatlist_SP.setSelection(0);*/
             }
@@ -571,8 +616,13 @@ public class Activity_ViewFarmers extends AppCompatActivity {
                 Obj_Class_GramanchayatDetails = (Class_GrampanchayatListDetails) grampanchayatlist_SP.getSelectedItem();
                 sp_strgrampanchayat_ID = Obj_Class_GramanchayatDetails.getGramanchayat_id().toString();
                 selected_grampanchayat = Obj_Class_GramanchayatDetails.getGramanchayat_name().toString();
-                sel_grampanchayatsp = grampanchayatlist_SP.getSelectedItemPosition();
+                int sel_grampanchayatsp_new = grampanchayatlist_SP.getSelectedItemPosition();
 
+                if(sel_grampanchayatsp_new!=sel_grampanchayatsp) {
+                    sel_grampanchayatsp=sel_grampanchayatsp_new;
+                    ViewFarmerList_arraylist.clear();
+                    farmerListViewAdapter.notifyDataSetChanged();
+                }
                /* Log.e("sp_stryear_ID..", sp_stryear_ID);
                 Log.e("sp_strstate_ID..", sp_strstate_ID);
                 Log.e("sp_strdistrict_ID..", sp_strdistrict_ID);
